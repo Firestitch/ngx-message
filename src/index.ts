@@ -3,7 +3,6 @@ import { FsMessageDialogComponent } from './fsmessagedialog.component';
 import { FsMessageComponent } from './fsmessage.component';
 import { FsMessagesComponent } from './fsmessages.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FsApiConfig } from './../.tmp/fsapi.service';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -44,7 +43,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export * from './fsapi.service';
+export * from './fsmessage.service';
+export * from './fsmessagedialog.component';
+export * from './fsmessage.component';
+export * from './fsmessages.component';
+
 @NgModule({
   imports: [
     CommonModule,

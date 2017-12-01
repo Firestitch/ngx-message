@@ -1,5 +1,5 @@
 {
-  "name": "@fs/message",
+  "name": "@firestitch/message",
   "version": "0.1.0",
   "repository": {
     "type": "git",
@@ -16,10 +16,10 @@
   "bugs": {
     "url": "https://github.com/Firestitch/fs-message/issues"
   },
-  "main": "fsmessage.umd.js",
-  "module": "fsmessage.js",
-  "jsnext:main": "fsmessage.js",
-  "typings": "fsmessage.d.ts",
+  "main": "fs-message.umd.js",
+  "module": "fs-message.js",
+  "jsnext:main": "fs-message.js",
+  "typings": "fs-message.d.ts",
   "peerDependencies": {
     "@angular/core": "^4.0.0",
     "rxjs": "^5.1.0",
