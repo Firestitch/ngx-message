@@ -125,7 +125,7 @@ gulp.task('rollup:umd', function () {
       // The name to use for the module for UMD/IIFE bundles
       // (required for bundles with exports)
       // See "name" in https://rollupjs.org/#core-functionality
-      name: 'fs-message',
+      name: 'message',
 
       // See "globals" in https://rollupjs.org/#core-functionality
       globals: {
@@ -133,7 +133,7 @@ gulp.task('rollup:umd', function () {
       }
 
     }))
-    .pipe(rename('fs-message.umd.js'))
+    .pipe(rename('message.umd.js'))
     .pipe(gulp.dest(distFolder));
 });
 
@@ -163,18 +163,19 @@ gulp.task('copy:readme', function () {
     .pipe(gulp.dest(distFolder));
 });
 
-/**
- * 10. Delete /.tmp folder
- */
-gulp.task('clean:tmp', function () {
-  return deleteFolders([tmpFolder]);
+gulp.task('copy:css', function () {
+  return gulp.src([`${srcFolder}/*css`])
+    .pipe(gulp.dest(distFolder));
 });
 
-/**
- * 11. Delete /build folder
- */
-gulp.task('clean:build', function () {
-  return deleteFolders([buildFolder]);
+/** * 10. Delete /.tmp folder */
+gulp.task('clean:tmp', function () { 
+  return deleteFolders([`{$tmpFolder}/**`]);
+});
+
+/** * 11. Delete /build folder */
+gulp.task('clean:build', function () { return 
+  deleteFolders([`{$buildFolder/**}`]);
 });
 
 gulp.task('compile', function () {
@@ -188,6 +189,7 @@ gulp.task('compile', function () {
     'copy:build',
     'copy:manifest',
     'copy:readme',
+    'copy:css',
     'clean:build',
     'clean:tmp',
     function (err) {

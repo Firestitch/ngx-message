@@ -2,22 +2,46 @@
  * This is only for local test
  */
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { Component } from '@angular/core';
+import { NgModule, Component, ViewEncapsulation } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { SampleModule }  from 'fs-address';
+import { FsMessageModule, FsMessage }  from '@firestitch/message';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
-  selector: 'app',
-  template: `<sample-component></sample-component>`
+  selector: 'app-root',
+  templateUrl: 'template.html',
+  styleUrls: [ 'styles.css' ],
+  encapsulation: ViewEncapsulation.None
 })
-class AppComponent {}
+class AppComponent {
+
+  constructor(private FsMessage: FsMessage) {}
+
+  error() {
+    this.FsMessage.error('Error message<br>HTML', { mode: 'toast', enableHtml: true });
+  }
+
+  warning() {
+    this.FsMessage.warning('Warning message');
+  }
+
+  info() {
+    this.FsMessage.info('Info message');
+  }
+
+  success() {
+    this.FsMessage.success('Success message');
+  }
+
+  progress() {
+    this.FsMessage.info('Loading...', { timeOut: 60, progressBar: true, progressAnimation: 'decreasing' });
+  }
+}
 
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [ AppComponent ],
-  imports: [ BrowserModule, SampleModule ]
+  imports: [ BrowserModule, FsMessageModule, BrowserAnimationsModule ]
 })
 class AppModule {}
 

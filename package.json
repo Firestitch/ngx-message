@@ -1,6 +1,4 @@
 {
-  "name": "fs-message",
-  "version": "0.1.0",
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp",
@@ -14,27 +12,14 @@
     "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
     "test": "tsc && karma start"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Firestitch/fs-message"
-  },
-  "author": {
-    "name": "Maksim Sergeev",
-    "email": "sergeev.maxs@gmail.com"
-  },
-  "keywords": [
-    "angular"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Firestitch/fs-message/issues"
-  },
   "devDependencies": {
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/core": "^5.0.0",
-    "@angular/flex-layout": "^2.0.0-beta.10-4905443",
+    "@angular/cdk": ">=5.0.0",
+    "@angular/animations": ">=5.0.0",
+    "@angular/flex-layout": "^2.0.0-beta.12-b67de70",
     "@angular/forms": "^5.0.3",
     "@angular/http": "^5.0.3",
     "@angular/material": "^5.0.0-rc.1",
@@ -49,6 +34,7 @@
     "core-js": "^2.4.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "ngx-toastr": "^7.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-rollup": "^2.15.0",
     "jasmine-core": "~2.6.2",
@@ -60,7 +46,6 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "lite-server": "^2.3.0",
-    "ngx-toastr": "^7.0.1",
     "node-sass": "^4.5.2",
     "node-sass-tilde-importer": "^1.0.0",
     "node-watch": "^0.5.2",

@@ -1,9 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, Injectable, Input, IterableDiffers, NgModule } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Observable as Observable$1 } from 'rxjs/Observable';
-import { MAT_DIALOG_DATA, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialog, MatDialogModule, MatDialogRef, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSliderModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -401,40 +399,8 @@ var FsMessageModule = (function () {
         { type: NgModule, args: [{
                     imports: [
                         CommonModule,
-                        HttpClientModule,
-                        MatAutocompleteModule,
-                        MatButtonModule,
-                        MatButtonToggleModule,
-                        MatCardModule,
-                        MatCheckboxModule,
-                        MatChipsModule,
-                        MatStepperModule,
-                        MatDatepickerModule,
-                        MatDialogModule,
-                        MatExpansionModule,
-                        MatGridListModule,
-                        MatIconModule,
-                        MatInputModule,
-                        MatListModule,
-                        MatMenuModule,
-                        MatNativeDateModule,
-                        MatPaginatorModule,
-                        MatProgressBarModule,
-                        MatProgressSpinnerModule,
-                        MatRadioModule,
-                        MatRippleModule,
-                        MatSelectModule,
-                        MatSidenavModule,
-                        MatSliderModule,
-                        MatSlideToggleModule,
-                        MatSnackBarModule,
-                        MatSortModule,
-                        MatTableModule,
-                        MatTabsModule,
-                        MatToolbarModule,
-                        MatTooltipModule,
-                        FlexLayoutModule
-                        //MATERIAL END
+                        ToastrModule.forRoot({ preventDuplicates: true }),
+                        MatDialogModule
                     ],
                     declarations: [
                         FsMessagesComponent,
@@ -442,7 +408,8 @@ var FsMessageModule = (function () {
                         FsMessageDialogComponent
                     ],
                     providers: [
-                        FsMessage
+                        FsMessage,
+                        ToastrService
                     ],
                     entryComponents: [
                         FsMessageDialogComponent

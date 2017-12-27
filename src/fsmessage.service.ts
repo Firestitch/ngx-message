@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
 import { FsMessageDialogComponent } from './fsmessagedialog.component';
