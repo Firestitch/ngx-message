@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, Inject, Injectable, Input, IterableDiffers, NgModule } from '@angular/core';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Observable as Observable$1 } from 'rxjs/Observable';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatButtonModule, MatDialog, MatDialogModule, MatDialogRef, MatIconModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -400,7 +400,9 @@ var FsMessageModule = (function () {
                     imports: [
                         CommonModule,
                         ToastrModule.forRoot({ preventDuplicates: true }),
-                        MatDialogModule
+                        MatDialogModule,
+                        MatIconModule,
+                        MatButtonModule
                     ],
                     declarations: [
                         FsMessagesComponent,

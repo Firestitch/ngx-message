@@ -22,7 +22,7 @@ var AppComponent = (function () {
         this.FsMessage = FsMessage;
     }
     AppComponent.prototype.error = function () {
-        this.FsMessage.error('Error message<br>HTML', { mode: 'toast', enableHtml: true });
+        this.FsMessage.error('Error message');
     };
     AppComponent.prototype.warning = function () {
         this.FsMessage.warning('Warning message');

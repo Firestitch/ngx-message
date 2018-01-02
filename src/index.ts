@@ -6,7 +6,7 @@ import { FsMessagesComponent } from './fsmessages.component';
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatIconModule, MatButtonModule } from '@angular/material';
 
 export * from './fsmessage.service';
 export * from './fsmessagedialog.component';
@@ -17,7 +17,9 @@ export * from './fsmessages.component';
   imports: [
     CommonModule,
     ToastrModule.forRoot({ preventDuplicates: true }),
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule
 ],
 declarations: [
   FsMessagesComponent,

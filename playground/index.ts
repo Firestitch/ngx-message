@@ -18,7 +18,7 @@ class AppComponent {
   constructor(private FsMessage: FsMessage) {}
 
   error() {
-    this.FsMessage.error('Error message<br>HTML', { mode: 'toast', enableHtml: true });
+    this.FsMessage.error('Error message');
   }
 
   warning() {
