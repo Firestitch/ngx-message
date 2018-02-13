@@ -32,8 +32,11 @@ Desktop.ini
 dist/*
 
 # Playground tmp files
-playground/*
+.playground
 /.tmp
 /build
 /dist
+/node_modules
 /.playground
+/dll
+/package-lock.json
