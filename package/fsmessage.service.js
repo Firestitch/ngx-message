@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,42 +7,37 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var ngx_toastr_1 = require("ngx-toastr");
-var Observable_1 = require("rxjs/Observable");
-var material_1 = require("@angular/material");
-var fsmessagedialog_component_1 = require("./fsmessagedialog.component");
+import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs/Observable';
+import { MatDialog } from '@angular/material';
+import { FsMessageDialogComponent } from './components/fsmessagedialog/fsmessagedialog.component';
 var FsMessage = (function () {
-    function FsMessage(toastr, dialog) {
+    function FsMessage(toastr, matDialog) {
         this.toastr = toastr;
-        this.dialog = dialog;
-        this._modals = 0;
+        this.matDialog = matDialog;
+        this._dialogs = 0;
         this._alerts = [];
         this._options = {
             success: {
                 mode: 'toast',
                 message: '',
-                toastHideDelay: 5,
-                bannerHideDelay: 10
+                timeout: 5
             },
             warning: {
                 mode: 'toast',
                 message: '',
-                toastHideDelay: 5,
-                bannerHideDelay: 10
+                timeout: 5
             },
             info: {
                 mode: 'toast',
                 message: '',
-                toastHideDelay: 5,
-                bannerHideDelay: 10
+                timeout: 5
             },
             error: {
-                mode: 'modal',
+                mode: 'dialog',
                 message: '',
-                toastHideDelay: 5,
-                bannerHideDelay: 10
+                timeout: 5
             }
         };
     }
@@ -84,10 +78,10 @@ var FsMessage = (function () {
         else if (options.mode === 'banner') {
             this.banner(type, message, options);
         }
-        else if (options.mode === 'modal') {
-            this.modal(type, message, options);
+        else if (options.mode === 'dialog') {
+            this.dialog(type, message, options);
         }
-        return Observable_1.Observable.create();
+        return Observable.create();
     };
     FsMessage.prototype.getIconName = function (type) {
         if (type === 'success') {
@@ -106,7 +100,7 @@ var FsMessage = (function () {
     FsMessage.prototype.toast = function (type, message, options) {
         options.enableHtml = true;
         options.positionClass = options.positionClass || 'toast-bottom-left';
-        options.timeOut = (options.timeOut === undefined ? this._options[type].toastHideDelay : options.timeOut) * 1000;
+        options.timeOut = (options.timeOut === undefined ? this._options[type].timeout : options.timeOut) * 1000;
         // toastr library removing all custom HTML tags from template
         var icon = options.icon ? "<div class=\"mat-icon material-icons\" role=\"img\" aria-hidden=\"true\">" + options.icon + "</div>" : '';
         var template = "<div class=\"mat-toast-content\">\n                        " + icon + "\n                        <div class=\"message\">" + message + "</div>\n                      </div>";
@@ -123,32 +117,39 @@ var FsMessage = (function () {
             msg: message,
             close: this.clear
         });
-        var timeout = this._options[type].bannerHideDelay * 1000;
+        var timeout = this._options[type].timeout * 1000;
         if (timeout) {
             setTimeout(function () {
                 _this.clear();
             }, 10000);
         }
     };
-    FsMessage.prototype.modal = function (type, message, options) {
+    FsMessage.prototype.dialog = function (type, message, options) {
         var _this = this;
-        this._modals++;
-        var dialogRef = this.dialog.open(fsmessagedialog_component_1.FsMessageDialogComponent, {
-            disableClose: true,
-            data: { type: type, message: message, options: options, icon: this.getIconName(type) }
+        this._dialogs++;
+        var dialogRef = this.matDialog.open(FsMessageDialogComponent, {
+            /* Waiting for MatDialog to support array of classes like panelClass
+            backdropClass: ['fs-message-backdrop',
+                            'fs-message-backdrop-' + type,
+                            options.backdropClass].filter(function(e){return e}), */
+            backdropClass: options.backdropClass,
+            data: { type: type, message: message, options: options, icon: this.getIconName(type) },
+            panelClass: ['fs-message-pane',
+                'fs-message-pane-' + type,
+                options.panelClass].filter(function (e) { return e; }),
         });
         dialogRef.afterClosed().subscribe(function (result) {
-            _this._modals--;
+            _this._dialogs--;
         });
     };
     FsMessage.prototype.clear = function () {
         this._alerts = [];
     };
     FsMessage = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [ngx_toastr_1.ToastrService, material_1.MatDialog])
+        Injectable(),
+        __metadata("design:paramtypes", [ToastrService, MatDialog])
     ], FsMessage);
     return FsMessage;
 }());
-exports.FsMessage = FsMessage;
+export { FsMessage };
 //# sourceMappingURL=fsmessage.service.js.map

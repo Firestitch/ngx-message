@@ -11,18 +11,18 @@ export class ModalExampleComponent {
   constructor(private FsMessage: FsMessage) { }
 
   error() {
-    this.FsMessage.error('Error message', { mode: 'modal' });
+    this.FsMessage.error('Error message', { mode: 'dialog' });
   }
 
   warning() {
-    this.FsMessage.warning('Warning message', { mode: 'modal', title: 'Warning' });
+    this.FsMessage.warning('Warning message', { mode: 'dialog', title: 'Warning' });
   }
 
   info() {
-    this.FsMessage.info('Info message', { mode: 'modal', title: 'Information' });
+    this.FsMessage.info('Info message', { mode: 'dialog', title: 'Information' });
   }
 
   success() {
-    this.FsMessage.success('Success message', { mode: 'modal', title: 'Success' });
+    this.FsMessage.success('Success message', { mode: 'dialog', title: 'Success' });
   }
 }

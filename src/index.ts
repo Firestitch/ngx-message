@@ -1,6 +1,6 @@
 export * from './fsmessage.module';
-export * from './fsmessage.component';
 export * from './fsmessage.service';
-export * from './fsmessagedialog.component';
-export * from './fsmessages.component';
+export * from './components/fsmessagedialog/fsmessagedialog.component';
+export * from './components/fsmessages/fsmessages.component';
+export * from './components/fsmessage/fsmessage.component';
 

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { MatDialogModule, MatIconModule, MatButtonModule } from '@angular/material';
 
-import { FsMessageComponent } from './fsmessage.component';
 import { FsMessage } from './fsmessage.service';
-import { FsMessageDialogComponent } from './fsmessagedialog.component';
-import { FsMessagesComponent } from './fsmessages.component';
+import { FsMessageDialogComponent } from './components/fsmessagedialog/fsmessagedialog.component';
+import { FsMessagesComponent } from './components/fsmessages/fsmessages.component';
+import { FsMessageComponent } from './components/fsmessage/fsmessage.component';
 
 @NgModule({
   imports: [

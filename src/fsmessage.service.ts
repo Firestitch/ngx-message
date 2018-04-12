@@ -2,43 +2,38 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
-import { FsMessageDialogComponent } from './fsmessagedialog.component';
+import { FsMessageDialogComponent } from './components/fsmessagedialog/fsmessagedialog.component';
 
 @Injectable()
 export class FsMessage {
 
-  private _modals = 0;
-
+  private _dialogs = 0;
   private _alerts = [];
 
   private _options = {
     success: {
       mode: 'toast',
       message: '',
-      toastHideDelay: 5,
-      bannerHideDelay: 10
+      timeout: 5
     },
     warning: {
       mode: 'toast',
       message: '',
-      toastHideDelay: 5,
-      bannerHideDelay: 10
+      timeout: 5
     },
     info: {
       mode: 'toast',
       message: '',
-      toastHideDelay: 5,
-      bannerHideDelay: 10
+      timeout: 5
     },
     error: {
-      mode: 'modal',
+      mode: 'dialog',
       message: '',
-      toastHideDelay: 5,
-      bannerHideDelay: 10
+      timeout: 5
     }
   };
 
-  constructor(private toastr: ToastrService, private dialog: MatDialog) {}
+  constructor(private toastr: ToastrService, private matDialog: MatDialog) {}
 
   get alerts() {
     return this._alerts;
@@ -60,27 +55,27 @@ export class FsMessage {
     return this.show('warning', message, options);
   }
 
-  private show(type: string, message: string, options): Observable<any> {
+  show(type: string, message: string, options): Observable<any> {
 
-      options = Object.assign({}, this._options[type] || {}, options || {});
+    options = Object.assign({}, this._options[type] || {}, options || {});
 
-      if(options.icon === undefined) {
-        options.icon = this.getIconName(type);
-      }
+    if (options.icon === undefined) {
+      options.icon = this.getIconName(type);
+    }
 
-      if (!message) {
-        message = options.message;
-      }
+    if (!message) {
+      message = options.message;
+    }
 
-      if (options.mode === 'toast') {
-        this.toast(type, message, options);
-      } else if (options.mode === 'banner') {
-        this.banner(type, message, options);
-      } else if (options.mode === 'modal') {
-          this.modal(type, message, options);
-      }
+    if (options.mode === 'toast') {
+      this.toast(type, message, options);
+    } else if (options.mode === 'banner') {
+      this.banner(type, message, options);
+    } else if (options.mode === 'dialog') {
+        this.dialog(type, message, options);
+    }
 
-      return Observable.create();
+    return Observable.create();
   }
 
   private getIconName(type: string): string {
@@ -99,7 +94,7 @@ export class FsMessage {
 
     options.enableHtml = true;
     options.positionClass = options.positionClass || 'toast-bottom-left';
-    options.timeOut = (options.timeOut === undefined ? this._options[type].toastHideDelay : options.timeOut) * 1000;
+    options.timeOut = (options.timeOut === undefined ? this._options[type].timeout : options.timeOut) * 1000;
 
     // toastr library removing all custom HTML tags from template
     const icon = options.icon ? `<div class="mat-icon material-icons" role="img" aria-hidden="true">${ options.icon }</div>` : '';
@@ -124,7 +119,7 @@ export class FsMessage {
         close: this.clear
     });
 
-    const timeout = this._options[type].bannerHideDelay * 1000;
+    const timeout = this._options[type].timeout * 1000;
     if (timeout) {
         setTimeout(() => {
           this.clear();
@@ -132,16 +127,23 @@ export class FsMessage {
     }
   }
 
-  modal(type: string, message: string, options): void {
+  dialog(type: string, message: string, options): void {
 
-    this._modals++;
-    const dialogRef = this.dialog.open(FsMessageDialogComponent, {
-      disableClose: true,
-      data: { type: type, message: message, options: options, icon: this.getIconName(type) }
+    this._dialogs++;
+    const dialogRef = this.matDialog.open(FsMessageDialogComponent, {
+      /* Waiting for MatDialog to support array of classes like panelClass
+      backdropClass: ['fs-message-backdrop',
+                      'fs-message-backdrop-' + type,
+                      options.backdropClass].filter(function(e){return e}), */
+      backdropClass: options.backdropClass,
+      data: { type: type, message: message, options: options, icon: this.getIconName(type) },
+      panelClass: [ 'fs-message-pane',
+                    'fs-message-pane-' + type,
+                    options.panelClass].filter(function(e){return e}),
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this._modals--;
+      this._dialogs--;
     });
   }
 
