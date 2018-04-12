@@ -1,40 +1,33 @@
+@import url(~ngx-toastr/toastr.css);
 #toast-container .mat-toast-content {
   display: flex;
-  align-items: center;
-}
+  align-items: center; }
 
 #toast-container .mat-icon {
   vertical-align: middle;
   margin: 0 10px 0 0;
-  color: #fff;
-}
-
+  color: #fff; }
 
 #toast-container .toast {
   padding: 15px 15px 15px 25px;
   background-color: #030303;
-  pointer-events: auto;
-}
+  pointer-events: auto; }
 
 #toast-container .toast.toast-info {
   background-image: none !important;
-  background-color: #29B7FF;
-}
+  background-color: #29B7FF; }
 
 #toast-container .toast.toast-error {
   background-image: none !important;
-  background-color: #FA7567;
-}
+  background-color: #FA7567; }
 
 #toast-container .toast.toast-success {
   background-image: none !important;
-  background-color: #34BD43;
-}
+  background-color: #34BD43; }
 
 #toast-container .toast.toast-warning {
   background-image: none !important;
-  background-color: #F2C91B;
-}
+  background-color: #F2C91B; }
 
 .fs-message-banner {
   -webkit-box-orient: horizontal;
@@ -54,57 +47,43 @@
   max-width: 100%;
   padding: 15px;
   border: 1px solid transparent;
-  border-radius: 3px;
-}
+  border-radius: 3px; }
 
 .fs-message-banner * {
-  color: #fff;
-}
+  color: #fff; }
 
 .fs-message-banner mat-icon {
-  margin-right: 10px;
-}
+  margin-right: 10px; }
 
 .fs-message-banner:nth-child(1n+2) {
-    margin-top: 5px;
-}
+  margin-top: 5px; }
 
 .fs-message-banner.fs-message-success {
-    background-color: #34BD43;
-}
+  background-color: #34BD43; }
 
 .fs-message-banner.fs-message-error {
-    background-color: #FA7567;
-}
+  background-color: #FA7567; }
 
 .fs-message-banner.fs-message-info {
-    background-color: #29B7FF;
-}
+  background-color: #29B7FF; }
 
 .fs-message-banner.fs-message-warning {
-    background-color: #F2C91B;
-}
+  background-color: #F2C91B; }
 
 fs-message-dialog > div {
-  min-width: 240px;
-}
+  min-width: 240px; }
 
 fs-message-dialog mat-icon {
-  margin-right: 10px;
-}
+  margin-right: 10px; }
 
 fs-message-dialog .fs-message-success .mat-icon {
-  color: #34BD43;
-}
+  color: #34BD43; }
 
 fs-message-dialog .fs-message-error .mat-icon {
-  color: #FA7567;
-}
+  color: #FA7567; }
 
 fs-message-dialog .fs-message-info .mat-icon {
-  color: #29B7FF;
-}
+  color: #29B7FF; }
 
 fs-message-dialog .fs-message-warning .mat-icon {
-  color: #F2C91B;
-}
+  color: #F2C91B; }
