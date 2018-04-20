@@ -13,7 +13,6 @@ import { BannerInlineExampleComponent } from './app/components/banner-inline-exa
 import { ModalExampleComponent } from './app/components/modal-example/modal-example.component';
 import { ToastExampleComponent } from './app/components/toast-example/toast-example.component';
 import { FsExampleModule } from '@firestitch/example';
-import { FsExamplesComponent } from '../tools/components/examples/examples.component';
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -32,8 +31,7 @@ import { FsExamplesComponent } from '../tools/components/examples/examples.compo
     BannerExampleComponent,
     BannerInlineExampleComponent,
     ModalExampleComponent,
-    ToastExampleComponent,
-    FsExamplesComponent
+    ToastExampleComponent
   ],
   providers: [
   ],
