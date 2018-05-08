@@ -1,5 +1,4 @@
 import './../tools/assets/playground.scss';
-import './../src/assets/styles.scss';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +12,7 @@ import { BannerInlineExampleComponent } from './app/components/banner-inline-exa
 import { ModalExampleComponent } from './app/components/modal-example/modal-example.component';
 import { ToastExampleComponent } from './app/components/toast-example/toast-example.component';
 import { FsExampleModule } from '@firestitch/example';
+
 
 @NgModule({
   bootstrap: [ AppComponent ],

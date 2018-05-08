@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,11 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs/Observable';
-import { MatDialog } from '@angular/material';
-import { FsMessageDialogComponent } from './components/fsmessagedialog/fsmessagedialog.component';
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var ngx_toastr_1 = require("ngx-toastr");
+var Observable_1 = require("rxjs/Observable");
+var material_1 = require("@angular/material");
+var fsmessagedialog_component_1 = require("./components/fsmessagedialog/fsmessagedialog.component");
 var FsMessage = (function () {
     function FsMessage(toastr, matDialog) {
         this.toastr = toastr;
@@ -81,7 +83,7 @@ var FsMessage = (function () {
         else if (options.mode === 'dialog') {
             this.dialog(type, message, options);
         }
-        return Observable.create();
+        return Observable_1.Observable.create();
     };
     FsMessage.prototype.getIconName = function (type) {
         if (type === 'success') {
@@ -127,7 +129,7 @@ var FsMessage = (function () {
     FsMessage.prototype.dialog = function (type, message, options) {
         var _this = this;
         this._dialogs++;
-        var dialogRef = this.matDialog.open(FsMessageDialogComponent, {
+        var dialogRef = this.matDialog.open(fsmessagedialog_component_1.FsMessageDialogComponent, {
             /* Waiting for MatDialog to support array of classes like panelClass
             backdropClass: ['fs-message-backdrop',
                             'fs-message-backdrop-' + type,
@@ -146,10 +148,10 @@ var FsMessage = (function () {
         this._alerts = [];
     };
     FsMessage = __decorate([
-        Injectable(),
-        __metadata("design:paramtypes", [ToastrService, MatDialog])
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [ngx_toastr_1.ToastrService, material_1.MatDialog])
     ], FsMessage);
     return FsMessage;
 }());
-export { FsMessage };
+exports.FsMessage = FsMessage;
 //# sourceMappingURL=fsmessage.service.js.map

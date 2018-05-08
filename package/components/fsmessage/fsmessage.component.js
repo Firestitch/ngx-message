@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,7 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, Input } from '@angular/core';
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
 var FsMessageComponent = (function () {
     function FsMessageComponent() {
         this.fsType = 'info';
@@ -18,15 +20,15 @@ var FsMessageComponent = (function () {
         this.icon = this.icons[this.fsType];
     };
     __decorate([
-        Input('fsType'),
+        core_1.Input('fsType'),
         __metadata("design:type", Object)
     ], FsMessageComponent.prototype, "fsType", void 0);
     __decorate([
-        Input('fsMessage'),
+        core_1.Input('fsMessage'),
         __metadata("design:type", String)
     ], FsMessageComponent.prototype, "fsMessage", void 0);
     FsMessageComponent = __decorate([
-        Component({
+        core_1.Component({
             selector: 'fs-message',
             template: "<div fxLayout=\"row\" fxLayoutAlign=\"start center\" class=\"fs-message-banner fs-message-{{ fsType }}\">\n      <div>\n        <mat-icon *ngIf=\"icon\" class=\"mat-icon material-icons\" role=\"img\">{{ icon }}</mat-icon>\n      </div>\n      <div *ngIf=\"fsMessage\">{{ fsMessage }}</div>\n    </div>"
         }),
@@ -34,5 +36,5 @@ var FsMessageComponent = (function () {
     ], FsMessageComponent);
     return FsMessageComponent;
 }());
-export { FsMessageComponent };
+exports.FsMessageComponent = FsMessageComponent;
 //# sourceMappingURL=fsmessage.component.js.map

@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,8 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, IterableDiffers } from '@angular/core';
-import { FsMessage } from './../../fsmessage.service';
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var fsmessage_service_1 = require("./../../fsmessage.service");
 var FsMessagesComponent = (function () {
     function FsMessagesComponent(fsMessage, _iterableDiffers) {
         this.fsMessage = fsMessage;
@@ -26,13 +28,13 @@ var FsMessagesComponent = (function () {
         }
     };
     FsMessagesComponent = __decorate([
-        Component({
+        core_1.Component({
             selector: 'fs-messages',
             template: "<fs-message *ngFor=\"let item of messages\" [fsType]=\"item.type\" [fsMessage]=\"item.msg\"></fs-message>"
         }),
-        __metadata("design:paramtypes", [FsMessage, IterableDiffers])
+        __metadata("design:paramtypes", [fsmessage_service_1.FsMessage, core_1.IterableDiffers])
     ], FsMessagesComponent);
     return FsMessagesComponent;
 }());
-export { FsMessagesComponent };
+exports.FsMessagesComponent = FsMessagesComponent;
 //# sourceMappingURL=fsmessages.component.js.map

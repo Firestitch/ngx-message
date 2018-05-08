@@ -1,3 +1,4 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,8 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var material_1 = require("@angular/material");
 var FsMessageDialogComponent = (function () {
     function FsMessageDialogComponent(dialogRef, data) {
         this.dialogRef = dialogRef;
@@ -21,15 +23,15 @@ var FsMessageDialogComponent = (function () {
         this.dialogRef.close();
     };
     FsMessageDialogComponent = __decorate([
-        Component({
+        core_1.Component({
             selector: 'fs-message-dialog',
             template: "<div class=\"fs-message-{{ data.type }}\">\n              <div mat-dialog-title fxLayout=\"row\" fxLayoutAlign=\"start center\">\n                <mat-icon>{{ data.icon }}</mat-icon>\n                <span>{{ data.options.title || 'Attention' }}</span>\n              </div>\n              <mat-dialog-content [innerHTML]=\"data.message\"></mat-dialog-content>\n              <mat-dialog-actions>\n                <button mat-button (click)=\"hide()\">OK</button>\n              </mat-dialog-actions>\n            </div>",
             styles: [":host .mat-dialog-title {\n              display: flex;\n              flex-direction: row;\n              align-items: center;\n            }"]
         }),
-        __param(1, Inject(MAT_DIALOG_DATA)),
-        __metadata("design:paramtypes", [MatDialogRef, Object])
+        __param(1, core_1.Inject(material_1.MAT_DIALOG_DATA)),
+        __metadata("design:paramtypes", [material_1.MatDialogRef, Object])
     ], FsMessageDialogComponent);
     return FsMessageDialogComponent;
 }());
-export { FsMessageDialogComponent };
+exports.FsMessageDialogComponent = FsMessageDialogComponent;
 //# sourceMappingURL=fsmessagedialog.component.js.map
