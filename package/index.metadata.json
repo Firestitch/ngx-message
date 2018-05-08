@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./fsmessage.module"},{"from":"./fsmessage.service"},{"from":"./components/fsmessagedialog/fsmessagedialog.component"},{"from":"./components/fsmessages/fsmessages.component"},{"from":"./components/fsmessage/fsmessage.component"}]}]
