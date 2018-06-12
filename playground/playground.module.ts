@@ -12,17 +12,19 @@ import { BannerInlineExampleComponent } from './app/components/banner-inline-exa
 import { ModalExampleComponent } from './app/components/modal-example/modal-example.component';
 import { ToastExampleComponent } from './app/components/toast-example/toast-example.component';
 import { FsExampleModule } from '@firestitch/example';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsMessageModule,
+    FsMessageModule.forRoot(),
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
-    FsExampleModule
+    FsExampleModule,
+    ToastrModule.forRoot({ preventDuplicates: true }),
   ],
   entryComponents: [
   ],

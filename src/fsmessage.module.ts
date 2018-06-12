@@ -14,7 +14,6 @@ import './styles.scss';
 @NgModule({
   imports: [
     CommonModule,
-    ToastrModule.forRoot({ preventDuplicates: true }),
     MatDialogModule,
     MatIconModule,
     MatButtonModule
@@ -32,8 +31,6 @@ import './styles.scss';
     FsMessageDialogComponent
   ],
   providers: [
-    FsMessage,
-    ToastrService
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
