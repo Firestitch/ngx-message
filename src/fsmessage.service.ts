@@ -8,6 +8,7 @@ import { FsMessageDialogComponent } from './components/fsmessagedialog/fsmessage
 export class FsMessage {
 
   private _dialogs = 0;
+  private _dialogsMessagesQueue = [];
   private _alerts = [];
 
   private _options = {
@@ -129,7 +130,13 @@ export class FsMessage {
 
   dialog(type: string, message: string, options): void {
 
+    const typeMessage = type + message;
+
+    if (this._dialogsMessagesQueue.indexOf(typeMessage) > -1) { return }
+
+    this._dialogsMessagesQueue.push(typeMessage);
     this._dialogs++;
+
     const dialogRef = this.matDialog.open(FsMessageDialogComponent, {
       /* Waiting for MatDialog to support array of classes like panelClass
       backdropClass: ['fs-message-backdrop',
@@ -144,6 +151,11 @@ export class FsMessage {
 
     dialogRef.afterClosed().subscribe(result => {
       this._dialogs--;
+
+      const dialogMessageIdx = this._dialogsMessagesQueue.indexOf(typeMessage);
+      if (dialogMessageIdx > -1) {
+        this._dialogsMessagesQueue.splice(dialogMessageIdx, 1);
+      }
     });
   }
 
