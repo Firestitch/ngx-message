@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog } from '@angular/material';
-import { FsMessageDialogComponent } from './components/fsmessagedialog/fsmessagedialog.component';
+import { FsMessageDialogComponent } from './components/fs-message-dialog/fs-message-dialog.component';
 
 @Injectable()
 export class FsMessage {

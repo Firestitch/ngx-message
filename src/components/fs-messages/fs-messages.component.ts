@@ -1,5 +1,5 @@
 import { Component, IterableDiffers, DoCheck } from '@angular/core';
-import { FsMessage } from './../../fsmessage.service';
+import { FsMessage } from '../../fs-message.service';
 
 @Component({
   selector: 'fs-messages',

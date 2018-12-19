@@ -1,7 +1,7 @@
 {
   "name": "@firestitch/message",
   "description": "@firestitch/message",
-  "version": "0.1.21",
+  "version": "0.1.23",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-message"

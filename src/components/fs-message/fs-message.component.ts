@@ -2,12 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'fs-message',
-  template: `<div fxLayout="row" fxLayoutAlign="start center" class="fs-message-banner fs-message-{{ fsType }}">
-      <div>
-        <mat-icon *ngIf="icon" class="mat-icon material-icons" role="img">{{ icon }}</mat-icon>
-      </div>
-      <div *ngIf="fsMessage">{{ fsMessage }}</div>
-    </div>`
+  templateUrl: './fs-message.component.html'
 })
 export class FsMessageComponent implements OnInit {
 

@@ -1,0 +1,6 @@
+<div fxLayout="row" fxLayoutAlign="start center" class="fs-message-banner fs-message-{{ fsType }}">
+  <div>
+    <mat-icon *ngIf="icon" class="mat-icon material-icons" role="img">{{ icon }}</mat-icon>
+  </div>
+  <div *ngIf="fsMessage">{{ fsMessage }}</div>
+</div>

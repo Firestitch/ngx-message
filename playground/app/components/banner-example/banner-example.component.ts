@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FsMessage } from './../../../../src/fsmessage.service';
+import { FsMessage } from '../../../../src/fs-message.service';
 
 @Component({
   selector: 'banner-example',
