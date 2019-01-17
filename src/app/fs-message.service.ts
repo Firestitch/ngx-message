@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { FsMessageDialogComponent } from './components/fs-message-dialog/fs-message-dialog.component';
 
@@ -60,9 +60,9 @@ export class FsMessage {
 
     options = Object.assign({}, this._options[type] || {}, options || {});
 
-    if (options.icon === undefined) {
-      options.icon = this.getIconName(type);
-    }
+    // if (options.icon === undefined) {
+    //   options.icon = this.getIconName(type);
+    // }
 
     if (!message) {
       message = options.message;

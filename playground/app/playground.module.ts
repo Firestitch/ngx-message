@@ -1,18 +1,19 @@
-import './../tools/assets/playground.scss';
-
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app/app.component';
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FsMessageModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from './app/material.module';
-import { BannerExampleComponent } from './app/components/banner-example/banner-example.component';
-import { BannerInlineExampleComponent } from './app/components/banner-inline-example/banner-inline-example.component';
-import { ModalExampleComponent } from './app/components/modal-example/modal-example.component';
-import { ToastExampleComponent } from './app/components/toast-example/toast-example.component';
+
 import { FsExampleModule } from '@firestitch/example';
+import { FsMessageModule } from '@firestitch/message';
+
 import { ToastrModule } from 'ngx-toastr';
+
+import { FsMaterialModule } from './material.module';
+import { BannerExampleComponent } from './components/banner-example/banner-example.component';
+import { BannerInlineExampleComponent } from './components/banner-inline-example/banner-inline-example.component';
+import { ModalExampleComponent } from './components/modal-example/modal-example.component';
+import { ToastExampleComponent } from './components/toast-example/toast-example.component';
 
 
 @NgModule({
@@ -21,9 +22,9 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     FsMessageModule.forRoot(),
     BrowserAnimationsModule,
-    AppMaterialModule,
+    FsMaterialModule,
     FormsModule,
-    FsExampleModule,
+    FsExampleModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
   ],
   entryComponents: [

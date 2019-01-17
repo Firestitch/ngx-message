@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FsMessage } from '../../../../src/fs-message.service';
+import { FsMessage } from '@firestitch/message';
 
 @Component({
   selector: 'toast-example',

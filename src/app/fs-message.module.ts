@@ -7,8 +7,6 @@ import { FsMessageDialogComponent } from './components/fs-message-dialog/fs-mess
 import { FsMessagesComponent } from './components/fs-messages/fs-messages.component';
 import { FsMessageComponent } from './components/fs-message/fs-message.component';
 
-import './styles.scss';
-
 
 @NgModule({
   imports: [
