@@ -43,7 +43,7 @@
     "@angular/platform-browser": "^7.2.1",
     "@angular/platform-browser-dynamic": "^7.2.1",
     "@compodoc/compodoc": "^1.1.7",
-    "@firestitch/example": "^0.5.1",
+    "@firestitch/example": "^0.5.2",
     "@firestitch/iframe": "^0.2.0",
     "codelyzer": "^4.5.0",
     "cpx": "^1.5.0",
