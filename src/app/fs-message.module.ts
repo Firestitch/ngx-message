@@ -2,10 +2,10 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatIconModule, MatButtonModule } from '@angular/material';
 
-import { FsMessage } from './fs-message.service';
-import { FsMessageDialogComponent } from './components/fs-message-dialog/fs-message-dialog.component';
-import { FsMessagesComponent } from './components/fs-messages/fs-messages.component';
-import { FsMessageComponent } from './components/fs-message/fs-message.component';
+import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
+import { FsMessagesComponent } from './components/messages/messages.component';
+import { FsMessageComponent } from './components/message/message.component';
+import { FsMessage } from './message.service';
 
 
 @NgModule({
@@ -27,8 +27,7 @@ import { FsMessageComponent } from './components/fs-message/fs-message.component
     FsMessageComponent,
     FsMessageDialogComponent
   ],
-  providers: [
-  ],
+  providers: [],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class FsMessageModule {

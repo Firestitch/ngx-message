@@ -6,5 +6,5 @@
 export { FsMessageModule } from './app/fs-message.module';
 
 // Services
-export { FsMessage } from './app/fs-message.service';
+export { FsMessage } from './app/message.service';
 

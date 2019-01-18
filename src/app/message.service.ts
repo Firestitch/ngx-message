@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
-import { FsMessageDialogComponent } from './components/fs-message-dialog/fs-message-dialog.component';
+
+import { Observable, Subject } from 'rxjs';
+
+import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
+import { takeUntil } from 'rxjs/operators';
+
 
 @Injectable()
-export class FsMessage {
+export class FsMessage implements OnDestroy {
 
   private _dialogs = 0;
   private _dialogsMessagesQueue = [];
@@ -34,35 +38,42 @@ export class FsMessage {
     }
   };
 
+  private _destroy$ = new Subject<void>();
+
   constructor(private toastr: ToastrService, private matDialog: MatDialog) {}
 
   get alerts() {
     return this._alerts;
   }
 
-  success(message: string, options: object = {}): Observable<any> {
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  public success(message: string, options: object = {}): Observable<any> {
     return this.show('success', message, options);
   }
 
-  info(message: string, options: object = {}): Observable<any> {
+  public info(message: string, options: object = {}): Observable<any> {
     return this.show('info', message, options);
   }
 
-  error(message: string, options: object = {}): Observable<any> {
+  public error(message: string, options: object = {}): Observable<any> {
     return this.show('error', message, options);
   }
 
-  warning(message: string, options: object = {}): Observable<any> {
+  public warning(message: string, options: object = {}): Observable<any> {
     return this.show('warning', message, options);
   }
 
-  show(type: string, message: string, options): Observable<any> {
+  public show(type: string, message: string, options): Observable<any> {
 
     options = Object.assign({}, this._options[type] || {}, options || {});
 
-    // if (options.icon === undefined) {
-    //   options.icon = this.getIconName(type);
-    // }
+    if (options.icon === undefined) {
+      options.icon = this.getIconName(type);
+    }
 
     if (!message) {
       message = options.message;
@@ -79,26 +90,16 @@ export class FsMessage {
     return Observable.create();
   }
 
-  private getIconName(type: string): string {
-    if (type === 'success') {
-       return 'done';
-    } else if (type === 'error') {
-        return 'report_problem';
-    } else if (type === 'info') {
-        return 'info';
-    } else if (type === 'warning') {
-        return 'report_problem';
-    }
-  }
-
-  toast(type: string, message: string, options): void {
+  public toast(type: string, message: string, options): void {
 
     options.enableHtml = true;
     options.positionClass = options.positionClass || 'toast-bottom-left';
     options.timeOut = (options.timeOut === undefined ? this._options[type].timeout : options.timeOut) * 1000;
 
     // toastr library removing all custom HTML tags from template
-    const icon = options.icon ? `<div class="mat-icon material-icons" role="img" aria-hidden="true">${ options.icon }</div>` : '';
+    const icon = options.icon
+      ? `<div class="mat-icon material-icons" role="img" aria-hidden="true">${ options.icon }</div>`
+      : '';
     const template = `<div class="mat-toast-content">
                         ${ icon }
                         <div class="message">${ message }</div>
@@ -106,7 +107,7 @@ export class FsMessage {
     this.toastr[type](template, options.title, options);
   }
 
-  banner(type: string, message: string, options): void {
+  public banner(type: string, message: string, options): void {
 
     options.clear = options.clear === undefined ? true : options.clear;
 
@@ -128,7 +129,7 @@ export class FsMessage {
     }
   }
 
-  dialog(type: string, message: string, options): void {
+  public dialog(type: string, message: string, options): void {
 
     const typeMessage = type + message;
 
@@ -149,7 +150,11 @@ export class FsMessage {
                     options.panelClass].filter(function(e){return e}),
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe(result => {
       this._dialogs--;
 
       const dialogMessageIdx = this._dialogsMessagesQueue.indexOf(typeMessage);
@@ -161,5 +166,17 @@ export class FsMessage {
 
   private clear() {
     this._alerts = [];
+  }
+
+  private getIconName(type: string): string {
+    if (type === 'success') {
+      return 'done';
+    } else if (type === 'error') {
+      return 'report_problem';
+    } else if (type === 'info') {
+      return 'info';
+    } else if (type === 'warning') {
+      return 'report_problem';
+    }
   }
 }

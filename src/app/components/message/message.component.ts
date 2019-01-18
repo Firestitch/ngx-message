@@ -2,19 +2,20 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'fs-message',
-  templateUrl: './fs-message.component.html'
+  templateUrl: './message.component.html'
 })
 export class FsMessageComponent implements OnInit {
 
-  @Input('fsType') fsType = 'info';
-  @Input('fsMessage') fsMessage: string;
+  @Input('fsType') public fsType = 'info';
+  @Input('fsMessage') public fsMessage: string;
+
+  public icon = 'info';
 
   private icons = { success: 'done', error: 'report_problem', info: 'info', warning: 'report_problem' };
-  icon = 'info';
 
   constructor() { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.icon = this.icons[this.fsType];
   }
 

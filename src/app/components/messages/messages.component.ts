@@ -1,5 +1,5 @@
 import { Component, IterableDiffers, DoCheck } from '@angular/core';
-import { FsMessage } from '../../fs-message.service';
+import { FsMessage } from '../../message.service';
 
 @Component({
   selector: 'fs-messages',
@@ -7,17 +7,20 @@ import { FsMessage } from '../../fs-message.service';
 })
 export class FsMessagesComponent implements DoCheck {
 
+  public messages = [];
   private iterableDiffer;
-  messages = [];
 
-  constructor(private fsMessage: FsMessage, private _iterableDiffers: IterableDiffers) {
+  constructor(
+    private _fsMessage: FsMessage,
+    private _iterableDiffers: IterableDiffers
+  ) {
     this.iterableDiffer = this._iterableDiffers.find([]).create(null);
   }
 
-  ngDoCheck() {
-    const changes = this.iterableDiffer.diff(this.fsMessage.alerts);
+  public ngDoCheck() {
+    const changes = this.iterableDiffer.diff(this._fsMessage.alerts);
     if (changes) {
-      this.messages = this.fsMessage.alerts;
+      this.messages = this._fsMessage.alerts;
     } else {
       this.messages = [];
     }
