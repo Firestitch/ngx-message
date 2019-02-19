@@ -2,7 +2,7 @@
   "name": "@firestitch/message",
   "title": "Message",
   "description": "@firestitch/message",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-message"
@@ -64,9 +64,6 @@
     "node": ">=6.0.0"
   },
   "peerDependencies": {
-    "ngx-toastr": ">=9.1.0"
-  },
-  "dependencies": {
     "ngx-toastr": ">=9.1.0"
   }
 }
