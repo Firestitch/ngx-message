@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MessageType } from '../../enums';
+import { FsMessage } from '../../message.service';
 
 @Component({
   selector: 'fs-message',
@@ -6,17 +8,24 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FsMessageComponent implements OnInit {
 
-  @Input('fsType') public fsType = 'info';
-  @Input('fsMessage') public fsMessage: string;
+  @Input() public type = MessageType.Info;
+  @Input() public message: string;
+
+  @Input('fsType')
+  set fsType(value) {
+    this.type = value;
+  }
+
+  @Input('fsMessage')
+  set fsMessage(value) {
+    this.message = value;
+  }
 
   public icon = 'info';
 
-  private icons = { success: 'done', error: 'report_problem', info: 'info', warning: 'report_problem' };
-
-  constructor() { }
+  constructor(private _fsMessage: FsMessage) { }
 
   public ngOnInit() {
-    this.icon = this.icons[this.fsType];
+    this.icon = this._fsMessage.getIconName(this.type);
   }
-
 }

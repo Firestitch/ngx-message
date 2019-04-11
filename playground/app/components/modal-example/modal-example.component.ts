@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FsMessage } from '@firestitch/message';
+import { FsMessage, MessageMode } from '@firestitch/message';
 
 @Component({
   selector: 'modal-example',
@@ -11,18 +11,39 @@ export class ModalExampleComponent {
   constructor(private FsMessage: FsMessage) { }
 
   error() {
-    this.FsMessage.error('Error message', { mode: 'dialog' });
+    this.FsMessage.error('Error message', { mode: MessageMode.Dialog });
   }
 
   warning() {
-    this.FsMessage.warning('Warning message', { mode: 'dialog', title: 'Warning' });
+    this.FsMessage.warning('Warning message', { mode: MessageMode.Dialog });
   }
 
   info() {
-    this.FsMessage.info('Info message', { mode: 'dialog', title: 'Information' });
+    this.FsMessage.info('Info message', { mode: MessageMode.Dialog });
   }
 
   success() {
-    this.FsMessage.success('Success message', { mode: 'dialog', title: 'Success' });
+    this.FsMessage.success('Success message', { mode: MessageMode.Dialog });
+  }
+
+  buttons() {
+    this.FsMessage.success('Success message',
+    {
+      mode: MessageMode.Dialog,
+      buttons: [
+        {
+          label: 'Custom Button',
+          click: () => {
+            alert('Clicked');
+          }
+        },
+        {
+          label: 'Another Custom Button',
+          click: () => {
+            alert('Clicked');
+          }
+        }
+      ]
+    });
   }
 }

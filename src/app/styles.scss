@@ -94,6 +94,21 @@
   }
 }
 
+fs-message {
+  display: block;
+}
+
+
+fs-messages {
+  fs-message {
+    margin-bottom: 5px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 fs-message-dialog {
   > div {
     min-width: 240px;

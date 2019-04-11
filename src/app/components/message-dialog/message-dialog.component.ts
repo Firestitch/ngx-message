@@ -16,4 +16,12 @@ export class FsMessageDialogComponent {
   public hide() {
     this.dialogRef.close();
   }
+
+  public buttonClick(button) {
+    if (button.click) {
+      button.click();
+    }
+
+    this.hide();
+  }
 }

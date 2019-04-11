@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { takeUntil } from 'rxjs/operators';
+import { MessageType, MessageMode } from './enums';
 
 
 @Injectable()
@@ -13,26 +14,26 @@ export class FsMessage implements OnDestroy {
 
   private _dialogs = 0;
   private _dialogsMessagesQueue = [];
-  private _alerts = [];
+  public bannerMessages$ = new Subject();
 
   private _options = {
     success: {
-      mode: 'toast',
+      mode: MessageMode.Toast,
       message: '',
       timeout: 5
     },
     warning: {
-      mode: 'toast',
+      mode: MessageMode.Toast,
       message: '',
       timeout: 5
     },
     info: {
-      mode: 'toast',
+      mode: MessageMode.Toast,
       message: '',
       timeout: 5
     },
     error: {
-      mode: 'dialog',
+      mode: MessageMode.Dialog,
       message: '',
       timeout: 5
     }
@@ -42,34 +43,48 @@ export class FsMessage implements OnDestroy {
 
   constructor(private toastr: ToastrService, private matDialog: MatDialog) {}
 
-  get alerts() {
-    return this._alerts;
-  }
-
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
   }
 
   public success(message: string, options: object = {}): Observable<any> {
-    return this.show('success', message, options);
+    return this.show(MessageType.Success, message, options);
   }
 
   public info(message: string, options: object = {}): Observable<any> {
-    return this.show('info', message, options);
+    return this.show(MessageType.Info, message, options);
   }
 
   public error(message: string, options: object = {}): Observable<any> {
-    return this.show('error', message, options);
+    return this.show(MessageType.Error, message, options);
   }
 
   public warning(message: string, options: object = {}): Observable<any> {
-    return this.show('warning', message, options);
+    return this.show(MessageType.Warning, message, options);
   }
 
   public show(type: string, message: string, options): Observable<any> {
 
     options = Object.assign({}, this._options[type] || {}, options || {});
+
+    if (!options.title) {
+      if (type === MessageType.Error) {
+        options.title = 'Attention';
+      }
+
+      if (type === MessageType.Info) {
+        options.title = 'Information';
+      }
+
+      if (type === MessageType.Success) {
+        options.title = 'Success';
+      }
+
+      if (type === MessageType.Warning) {
+        options.title = 'Warning';
+      }
+    }
 
     if (options.icon === undefined) {
       options.icon = this.getIconName(type);
@@ -79,11 +94,13 @@ export class FsMessage implements OnDestroy {
       message = options.message;
     }
 
-    if (options.mode === 'toast') {
+    if (options.mode === MessageMode.Toast) {
       this.toast(type, message, options);
-    } else if (options.mode === 'banner') {
+
+    } else if (options.mode === MessageMode.Banner) {
       this.banner(type, message, options);
-    } else if (options.mode === 'dialog') {
+
+    } else if (options.mode === MessageMode.Dialog) {
         this.dialog(type, message, options);
     }
 
@@ -104,29 +121,18 @@ export class FsMessage implements OnDestroy {
                         ${ icon }
                         <div class="message">${ message }</div>
                       </div>`;
-    this.toastr[type](template, options.title, options);
+    this.toastr[type](template, '', options);
   }
 
   public banner(type: string, message: string, options): void {
 
-    options.clear = options.clear === undefined ? true : options.clear;
+    const timeout = this._options[type].timeout * 1000;
 
-    if (options.clear) {
-      this.clear();
-    }
-
-    this._alerts.push({
+    this.bannerMessages$.next({
         type: type,
         msg: message,
-        close: this.clear
+        timeout: timeout
     });
-
-    const timeout = this._options[type].timeout * 1000;
-    if (timeout) {
-        setTimeout(() => {
-          this.clear();
-        }, 10000);
-    }
   }
 
   public dialog(type: string, message: string, options): void {
@@ -144,10 +150,11 @@ export class FsMessage implements OnDestroy {
                       'fs-message-backdrop-' + type,
                       options.backdropClass].filter(function(e){return e}), */
       backdropClass: options.backdropClass,
+      disableClose: options.buttons,
       data: { type: type, message: message, options: options, icon: this.getIconName(type) },
       panelClass: [ 'fs-message-pane',
                     'fs-message-pane-' + type,
-                    options.panelClass].filter(function(e){return e}),
+                    options.panelClass].filter(function(e) { return e }),
     });
 
     dialogRef.afterClosed()
@@ -164,18 +171,14 @@ export class FsMessage implements OnDestroy {
     });
   }
 
-  private clear() {
-    this._alerts = [];
-  }
-
-  private getIconName(type: string): string {
-    if (type === 'success') {
+  public getIconName(type: string): string {
+    if (type === MessageType.Success) {
       return 'done';
-    } else if (type === 'error') {
+    } else if (type === MessageType.Error) {
       return 'report_problem';
-    } else if (type === 'info') {
+    } else if (type === MessageType.Info) {
       return 'info';
-    } else if (type === 'warning') {
+    } else if (type === MessageType.Warning) {
       return 'report_problem';
     }
   }

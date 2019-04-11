@@ -1,28 +1,31 @@
-import { Component, IterableDiffers, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FsMessage } from '../../message.service';
+import { remove } from 'lodash-es';
+
 
 @Component({
   selector: 'fs-messages',
   template: `<fs-message *ngFor="let item of messages" [fsType]="item.type" [fsMessage]="item.msg"></fs-message>`
 })
-export class FsMessagesComponent implements DoCheck {
+export class FsMessagesComponent implements OnInit {
 
   public messages = [];
-  private iterableDiffer;
 
   constructor(
-    private _fsMessage: FsMessage,
-    private _iterableDiffers: IterableDiffers
-  ) {
-    this.iterableDiffer = this._iterableDiffers.find([]).create(null);
-  }
+    private _fsMessage: FsMessage) {}
 
-  public ngDoCheck() {
-    const changes = this.iterableDiffer.diff(this._fsMessage.alerts);
-    if (changes) {
-      this.messages = this._fsMessage.alerts;
-    } else {
-      this.messages = [];
-    }
+  public ngOnInit () {
+    this._fsMessage.bannerMessages$
+    .subscribe((message: any) => {
+      this.messages.push(message);
+
+      if (message.timeout) {
+        setTimeout(() => {
+          remove(this.messages, (item) => {
+            return item === message;
+          });
+        }, message.timeout);
+      }
+    })
   }
 }
