@@ -115,11 +115,11 @@ export class FsMessage implements OnDestroy {
 
     // toastr library removing all custom HTML tags from template
     const icon = options.icon
-      ? `<div class="mat-icon material-icons" role="img" aria-hidden="true">${ options.icon }</div>`
+      ? `<div class="mat-icon material-icons">${ options.icon }</div>`
       : '';
     const template = `<div class="mat-toast-content">
-                        ${ icon }
-                        <div class="message">${ message }</div>
+                        ${icon}
+                        <div class="message">${message}</div>
                       </div>`;
     this.toastr[type](template, '', options);
   }

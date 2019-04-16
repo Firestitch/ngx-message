@@ -11,19 +11,19 @@ export class ModalExampleComponent {
   constructor(private FsMessage: FsMessage) { }
 
   error() {
-    this.FsMessage.error('Error message', { mode: MessageMode.Dialog });
+    this.FsMessage.error('Error message<br><br>Custom HTML', { mode: MessageMode.Dialog });
   }
 
   warning() {
-    this.FsMessage.warning('Warning message', { mode: MessageMode.Dialog });
+    this.FsMessage.warning('Warning message<br><br>Custom HTML', { mode: MessageMode.Dialog });
   }
 
   info() {
-    this.FsMessage.info('Info message', { mode: MessageMode.Dialog });
+    this.FsMessage.info('Info message<br><br>Custom HTML', { mode: MessageMode.Dialog });
   }
 
   success() {
-    this.FsMessage.success('Success message', { mode: MessageMode.Dialog });
+    this.FsMessage.success('Success message<br><br>Custom HTML', { mode: MessageMode.Dialog });
   }
 
   buttons() {
