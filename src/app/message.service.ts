@@ -111,16 +111,12 @@ export class FsMessage implements OnDestroy {
 
     options.enableHtml = true;
     options.positionClass = options.positionClass || 'toast-bottom-left';
-    options.timeOut = (options.timeOut === undefined ? this._options[type].timeout : options.timeOut) * 1000;
+    options.timeOut = (options.timeout === undefined ? this._options[type].timeout : options.timeout) * 1000;
 
-    // toastr library removing all custom HTML tags from template
-    const icon = options.icon
-      ? `<div class="mat-icon material-icons">${ options.icon }</div>`
-      : '';
-    const template = `<div class="mat-toast-content">
-                        ${icon}
-                        <div class="message">${message}</div>
-                      </div>`;
+    const icon = options.icon ? `<div class="mat-icon material-icons">${ options.icon }</div>` : '';
+
+    const template = `<div class="mat-toast-content">${icon}<div class="message">${message}</div></div>`;
+
     this.toastr[type](template, '', options);
   }
 
