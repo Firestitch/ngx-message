@@ -32,13 +32,6 @@ const FS_MESSAGE_DEFAULT_CONFIG = {
     FsMessageComponent,
     FsMessageDialogComponent
   ],
-  providers: [
-    FsMessage,
-    {
-      provide: FS_MESSAGE_CONFIG,
-      useValue: FS_MESSAGE_DEFAULT_CONFIG
-    }
-  ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class FsMessageModule {

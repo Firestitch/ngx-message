@@ -25,6 +25,8 @@ export class FsMessage implements OnDestroy {
               private matDialog: MatDialog,
               @Inject(FS_MESSAGE_CONFIG) private config) {
 
+    config = config || {};
+    config.toastTimeout = config.toastTimeout || 5;
     this._options = {
       success: {
         mode: MessageMode.Toast,

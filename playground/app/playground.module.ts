@@ -31,8 +31,6 @@ import { ToastExampleComponent } from './components/toast-example/toast-example.
     FlexLayoutModule,
     ToastrModule.forRoot({ preventDuplicates: true }),
   ],
-  entryComponents: [
-  ],
   declarations: [
     AppComponent,
     BannerExampleComponent,
