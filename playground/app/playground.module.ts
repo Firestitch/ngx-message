@@ -21,7 +21,9 @@ import { ToastExampleComponent } from './components/toast-example/toast-example.
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsMessageModule.forRoot(),
+    FsMessageModule.forRoot({
+      toastTimeout: 3
+    }),
     BrowserAnimationsModule,
     FsMaterialModule,
     FormsModule,
@@ -37,8 +39,6 @@ import { ToastExampleComponent } from './components/toast-example/toast-example.
     BannerInlineExampleComponent,
     ModalExampleComponent,
     ToastExampleComponent
-  ],
-  providers: [
   ],
 })
 export class PlaygroundModule {

@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material';
 
@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { MessageType, MessageMode } from './enums';
+import { FS_MESSAGE_CONFIG } from './injectors/message-config';
 
 
 @Injectable()
@@ -16,32 +17,38 @@ export class FsMessage implements OnDestroy {
   private _dialogsMessagesQueue = [];
   public bannerMessages$ = new Subject();
 
-  private _options = {
-    success: {
-      mode: MessageMode.Toast,
-      message: '',
-      timeout: 5
-    },
-    warning: {
-      mode: MessageMode.Toast,
-      message: '',
-      timeout: 5
-    },
-    info: {
-      mode: MessageMode.Toast,
-      message: '',
-      timeout: 5
-    },
-    error: {
-      mode: MessageMode.Dialog,
-      message: '',
-      timeout: 5
-    }
-  };
+  private _options = {};
 
   private _destroy$ = new Subject<void>();
 
-  constructor(private toastr: ToastrService, private matDialog: MatDialog) {}
+  constructor(private toastr: ToastrService,
+              private matDialog: MatDialog,
+              @Inject(FS_MESSAGE_CONFIG) private config) {
+
+    this._options = {
+      success: {
+        mode: MessageMode.Toast,
+        message: '',
+        timeout: config.toastTimeout
+      },
+      warning: {
+        mode: MessageMode.Toast,
+        message: '',
+        timeout: config.toastTimeout
+      },
+      info: {
+        mode: MessageMode.Toast,
+        message: '',
+        timeout: config.toastTimeout
+      },
+      error: {
+        mode: MessageMode.Dialog,
+        message: '',
+        timeout: config.toastTimeout
+      }
+    }
+
+  }
 
   public ngOnDestroy(): void {
     this._destroy$.next();

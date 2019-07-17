@@ -6,7 +6,12 @@ import { FsMessageDialogComponent } from './components/message-dialog/message-di
 import { FsMessagesComponent } from './components/messages/messages.component';
 import { FsMessageComponent } from './components/message/message.component';
 import { FsMessage } from './message.service';
+import { FsMessageConfig } from './interfaces/message-config';
+import { FS_MESSAGE_CONFIG } from './injectors/message-config';
 
+const FS_MESSAGE_DEFAULT_CONFIG = {
+  toastTimeout: 5
+}
 
 @NgModule({
   imports: [
@@ -27,14 +32,33 @@ import { FsMessage } from './message.service';
     FsMessageComponent,
     FsMessageDialogComponent
   ],
-  providers: [],
+  providers: [
+    FsMessage,
+    {
+      provide: FS_MESSAGE_CONFIG,
+      useValue: FS_MESSAGE_DEFAULT_CONFIG
+    }
+  ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class FsMessageModule {
-  static forRoot(): ModuleWithProviders {
+
+  static forRoot(config: FsMessageConfig = {}): ModuleWithProviders {
     return {
       ngModule: FsMessageModule,
-      providers: [FsMessage]
+      providers: [
+        FsMessage,
+        {
+          provide: FS_MESSAGE_CONFIG,
+          useValue: Object.assign(
+            {},
+            FS_MESSAGE_DEFAULT_CONFIG,
+            config || {}
+          )
+        }
+      ]
     };
   }
 }
+
+

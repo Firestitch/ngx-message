@@ -9,3 +9,6 @@ export { FsMessageModule } from './app/fs-message.module';
 export { FsMessage } from './app/message.service';
 export { MessageMode, MessageType } from './app/enums';
 
+
+export { FsMessageConfig } from './app/interfaces/message-config';
+
