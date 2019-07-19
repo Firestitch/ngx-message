@@ -2,16 +2,15 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatIconModule, MatButtonModule } from '@angular/material';
 
+import { merge } from 'lodash-es';
+
 import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { FsMessagesComponent } from './components/messages/messages.component';
 import { FsMessageComponent } from './components/message/message.component';
 import { FsMessage } from './message.service';
 import { FsMessageConfig } from './interfaces/message-config';
-import { FS_MESSAGE_CONFIG } from './injectors/message-config';
+import { FS_MESSAGE_CONFIG, FS_MESSAGE_DEFAULT_CONFIG } from './injectors/message-config';
 
-const FS_MESSAGE_DEFAULT_CONFIG = {
-  toastTimeout: 5
-}
 
 @NgModule({
   imports: [
@@ -41,17 +40,19 @@ export class FsMessageModule {
       ngModule: FsMessageModule,
       providers: [
         FsMessage,
+        { provide: FS_MESSAGE_DEFAULT_CONFIG, useValue: config },
         {
           provide: FS_MESSAGE_CONFIG,
-          useValue: Object.assign(
-            {},
-            FS_MESSAGE_DEFAULT_CONFIG,
-            config || {}
-          )
-        }
+          useFactory: FsMessageConfigFactory,
+          deps: [FS_MESSAGE_DEFAULT_CONFIG]
+        },
       ]
     };
   }
 }
 
+
+export function FsMessageConfigFactory(config: FsMessageConfig) {
+  return merge({ toastTimeout: 5 }, config);
+}
 
