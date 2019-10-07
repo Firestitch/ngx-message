@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'fs-message-dialog',
   templateUrl: './message-dialog.component.html',
-  styleUrls: ['./message-dialog.component.css']
+  styleUrls: ['./message-dialog.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsMessageDialogComponent {
 

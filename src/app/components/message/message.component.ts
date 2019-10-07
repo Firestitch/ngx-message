@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MessageType } from '../../enums';
 import { FsMessage } from '../../message.service';
 
 @Component({
   selector: 'fs-message',
-  templateUrl: './message.component.html'
+  templateUrl: './message.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsMessageComponent implements OnInit {
 
