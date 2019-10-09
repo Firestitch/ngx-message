@@ -2,12 +2,16 @@ import { Injectable, OnDestroy, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 
 import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { MessageType, MessageMode } from './enums';
 import { FS_MESSAGE_CONFIG } from './injectors/message-config';
+import { FsMessageConfig } from './interfaces';
+import { MessageDialogConfig } from './interfaces/message-dialog-config';
+import { MessageToastConfig } from './interfaces/message-toast-config';
+import { MessageBannerConfig } from './interfaces/message-banner-config';
 
 
 @Injectable()
@@ -17,90 +21,38 @@ export class FsMessage implements OnDestroy {
   private _dialogsMessagesQueue = [];
   public bannerMessages$ = new Subject();
 
-  private _options = {};
-
   private _destroy$ = new Subject<void>();
 
   constructor(private toastr: ToastrService,
               private matDialog: MatDialog,
-              @Inject(FS_MESSAGE_CONFIG) private config) {
-
-    config = config || {};
-    config.toastTimeout = config.toastTimeout || 5;
-    this._options = {
-      success: {
-        mode: MessageMode.Toast,
-        message: '',
-        timeout: config.toastTimeout
-      },
-      warning: {
-        mode: MessageMode.Toast,
-        message: '',
-        timeout: config.toastTimeout
-      },
-      info: {
-        mode: MessageMode.Toast,
-        message: '',
-        timeout: config.toastTimeout
-      },
-      error: {
-        mode: MessageMode.Dialog,
-        message: '',
-        timeout: config.toastTimeout
-      }
-    }
-
-  }
+              @Inject(FS_MESSAGE_CONFIG) private _config: FsMessageConfig) {}
 
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
   }
 
-  public success(message: string, options: object = {}): Observable<any> {
-    return this.show(MessageType.Success, message, options);
+  public success(message: string, options: MessageDialogConfig | MessageToastConfig | MessageBannerConfig = {}): Observable<any> {
+    return this.show(MessageType.Success, message, Object.assign({ title: 'Success', mode: this._config.successMode }, options));
   }
 
-  public info(message: string, options: object = {}): Observable<any> {
-    return this.show(MessageType.Info, message, options);
+  public info(message: string, options: MessageDialogConfig | MessageToastConfig | MessageBannerConfig = {}): Observable<any> {
+    return this.show(MessageType.Info, message, Object.assign({ title: 'Information', mode: this._config.infoMode }, options));
   }
 
-  public error(message: string, options: object = {}): Observable<any> {
-    return this.show(MessageType.Error, message, options);
+  public error(message: string, options: MessageDialogConfig | MessageToastConfig | MessageBannerConfig = {}): Observable<any> {
+    return this.show(MessageType.Error, message, Object.assign({ title: 'Attention', mode: this._config.errorMode }, options));
   }
 
-  public warning(message: string, options: object = {}): Observable<any> {
-    return this.show(MessageType.Warning, message, options);
+  public warning(message: string, options: MessageDialogConfig | MessageToastConfig | MessageBannerConfig = {}): Observable<any> {
+    return this.show(MessageType.Warning, message, Object.assign({ title: 'Warning', mode: this._config.warningMode }, options));
   }
 
-  public show(type: string, message: string, options): Observable<any> {
+  public show(type: string, message: string, options: MessageDialogConfig | MessageToastConfig | MessageBannerConfig): Observable<any> {
 
-    options = Object.assign({}, this._options[type] || {}, options || {});
-
-    if (!options.title) {
-      if (type === MessageType.Error) {
-        options.title = 'Attention';
-      }
-
-      if (type === MessageType.Info) {
-        options.title = 'Information';
-      }
-
-      if (type === MessageType.Success) {
-        options.title = 'Success';
-      }
-
-      if (type === MessageType.Warning) {
-        options.title = 'Warning';
-      }
-    }
-
+    options = options || {};
     if (options.icon === undefined) {
       options.icon = this.getIconName(type);
-    }
-
-    if (!message) {
-      message = options.message;
     }
 
     if (options.mode === MessageMode.Toast) {
@@ -110,41 +62,42 @@ export class FsMessage implements OnDestroy {
       this.banner(type, message, options);
 
     } else if (options.mode === MessageMode.Dialog) {
-        this.dialog(type, message, options);
+      this.dialog(type, message, options);
     }
 
-    return Observable.create();
+    return of();
   }
 
-  public toast(type: string, message: string, options): void {
+  public toast(type: string, message: string, options: MessageToastConfig): void {
 
-    options.enableHtml = true;
-    options.positionClass = options.positionClass || 'toast-bottom-left';
-    options.timeOut = (options.timeout === undefined ? this._options[type].timeout : options.timeout) * 1000;
+    const opts: any = options;
+    opts.enableHtml = true;
+    opts.positionClass = options.positionClass || 'toast-bottom-left';
+    opts.timeOut = (options.timeout || this._config.toastTimeout) * 1000;
 
-    const icon = options.icon ? `<div class="mat-icon material-icons">${ options.icon }</div>` : '';
+    const icon = opts.icon ? `<div class="mat-icon material-icons">${ opts.icon }</div>` : '';
 
     const template = `<div class="mat-toast-content">${icon}<div class="message">${message}</div></div>`;
 
-    this.toastr[type](template, '', options);
+    this.toastr[type](template, '', opts);
   }
 
-  public banner(type: string, message: string, options): void {
-
-    const timeout = this._options[type].timeout * 1000;
+  public banner(type: string, message: string, options: MessageBannerConfig): void {
 
     this.bannerMessages$.next({
         type: type,
         msg: message,
-        timeout: timeout
+        timeout: (options.timeout || this._config.bannerTimeout || 5) * 1000
     });
   }
 
-  public dialog(type: string, message: string, options): void {
+  public dialog(type: string, message: string, options: MessageDialogConfig): void {
 
     const typeMessage = type + message;
 
-    if (this._dialogsMessagesQueue.indexOf(typeMessage) > -1) { return }
+    if (this._dialogsMessagesQueue.indexOf(typeMessage) > -1) {
+      return
+    }
 
     this._dialogsMessagesQueue.push(typeMessage);
     this._dialogs++;
@@ -153,13 +106,14 @@ export class FsMessage implements OnDestroy {
       /* Waiting for MatDialog to support array of classes like panelClass
       backdropClass: ['fs-message-backdrop',
                       'fs-message-backdrop-' + type,
-                      options.backdropClass].filter(function(e){return e}), */
+                      options.backdropClass], */
       backdropClass: options.backdropClass,
-      disableClose: options.buttons,
+      disableClose: !!options.buttons,
+      width: options.width || this._config.dialogWidth,
       data: { type: type, message: message, options: options, icon: this.getIconName(type) },
       panelClass: [ 'fs-message-pane',
                     'fs-message-pane-' + type,
-                    options.panelClass].filter(function(e) { return e }),
+                    options.panelClass],
     });
 
     dialogRef.afterClosed()
@@ -167,13 +121,13 @@ export class FsMessage implements OnDestroy {
         takeUntil(this._destroy$),
       )
       .subscribe(result => {
-      this._dialogs--;
+        this._dialogs--;
 
-      const dialogMessageIdx = this._dialogsMessagesQueue.indexOf(typeMessage);
-      if (dialogMessageIdx > -1) {
-        this._dialogsMessagesQueue.splice(dialogMessageIdx, 1);
-      }
-    });
+        const dialogMessageIdx = this._dialogsMessagesQueue.indexOf(typeMessage);
+        if (dialogMessageIdx > -1) {
+          this._dialogsMessagesQueue.splice(dialogMessageIdx, 1);
+        }
+      });
   }
 
   public getIconName(type: string): string {

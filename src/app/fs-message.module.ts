@@ -10,8 +10,9 @@ import { FsMessageDialogComponent } from './components/message-dialog/message-di
 import { FsMessagesComponent } from './components/messages/messages.component';
 import { FsMessageComponent } from './components/message/message.component';
 import { FsMessage } from './message.service';
-import { FsMessageConfig } from './interfaces/message-config';
+import { FsMessageConfig } from './interfaces/fs-message-config';
 import { FS_MESSAGE_CONFIG, FS_MESSAGE_DEFAULT_CONFIG } from './injectors/message-config';
+import { MessageMode } from './enums';
 
 
 @NgModule({
@@ -55,6 +56,13 @@ export class FsMessageModule {
 
 
 export function FsMessageConfigFactory(config: FsMessageConfig) {
-  return merge({ toastTimeout: 5 }, config);
+  return merge({
+    toastTimeout: 5,
+    bannerTimeout: 5,
+    dialogWidth: '400px',
+    successMode: MessageMode.Toast,
+    errorMode: MessageMode.Dialog,
+    warningMode: MessageMode.Toast,
+    infoMode: MessageMode.Toast
+  }, config);
 }
-

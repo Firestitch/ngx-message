@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FsMessage } from '@firestitch/message';
+import { FsMessage, MessageMode } from '@firestitch/message';
 
 @Component({
   selector: 'toast-example',
@@ -11,7 +11,7 @@ export class ToastExampleComponent {
   constructor(private FsMessage: FsMessage) { }
 
   error() {
-    this.FsMessage.error('<div class="heading">Heading</div>Error message', { mode: 'toast' });
+    this.FsMessage.error('<div class="heading">Heading</div>Error message', { mode: MessageMode.Toast });
   }
 
   warning() {

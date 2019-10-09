@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FsMessage } from '@firestitch/message';
+import { FsMessage, MessageMode } from '@firestitch/message';
 
 @Component({
   selector: 'banner-example',
@@ -11,18 +11,18 @@ export class BannerExampleComponent {
   constructor(private FsMessage: FsMessage) { }
 
   success() {
-    this.FsMessage.success('Success message', { mode: 'banner' });
+    this.FsMessage.success('Success message', { mode: MessageMode.Banner });
   }
 
   info() {
-    this.FsMessage.info('Info message', { mode: 'banner' });
+    this.FsMessage.info('Info message', { mode: MessageMode.Banner });
   }
 
   warning() {
-    this.FsMessage.warning('Warning message', { mode: 'banner' });
+    this.FsMessage.warning('Warning message', { mode: MessageMode.Banner });
   }
 
   error() {
-    this.FsMessage.error('Error message', { mode: 'banner' });
+    this.FsMessage.error('Error message', { mode: MessageMode.Banner });
   }
 }
