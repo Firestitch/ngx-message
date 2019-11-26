@@ -33,6 +33,7 @@ export class ModalExampleComponent {
       buttons: [
         {
           label: 'Custom Button',
+          color: 'primary',
           click: () => {
             alert('Clicked');
           }
