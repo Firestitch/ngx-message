@@ -27,7 +27,7 @@ export class ToastExampleComponent {
   }
 
   progress() {
-    this.FsMessage.info('Progress Bar...', { timeout: 20, progressBar: true, progressAnimation: 'decreasing' });
+    this.FsMessage.info('Progress Bar...', { timeout: 120, progressBar: true, progressAnimation: 'decreasing' });
   }
 
   icon() {

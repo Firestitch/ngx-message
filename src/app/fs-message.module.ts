@@ -59,7 +59,7 @@ export function FsMessageConfigFactory(config: FsMessageConfig) {
   return merge({
     toastTimeout: 5,
     bannerTimeout: 5,
-    dialogWidth: '400px',
+    dialogWidth: '500px',
     successMode: MessageMode.Toast,
     errorMode: MessageMode.Dialog,
     warningMode: MessageMode.Toast,

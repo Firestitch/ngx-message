@@ -29,7 +29,7 @@ import { ToastExampleComponent } from './components/toast-example/toast-example.
     FormsModule,
     FsExampleModule.forRoot(),
     FlexLayoutModule,
-    ToastrModule.forRoot({ preventDuplicates: true }),
+    ToastrModule.forRoot({ preventDuplicates: true, positionClass: 'toast-top-center' }),
   ],
   declarations: [
     AppComponent,

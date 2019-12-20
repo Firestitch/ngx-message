@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, TOAST_CONFIG, ToastToken } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Observable, Subject, of } from 'rxjs';
@@ -25,6 +25,7 @@ export class FsMessage implements OnDestroy {
 
   constructor(private toastr: ToastrService,
               private matDialog: MatDialog,
+              @Inject(TOAST_CONFIG) private _toastToken: ToastToken,
               @Inject(FS_MESSAGE_CONFIG) private _config: FsMessageConfig) {}
 
   public ngOnDestroy(): void {
@@ -72,7 +73,7 @@ export class FsMessage implements OnDestroy {
 
     const opts: any = options;
     opts.enableHtml = true;
-    opts.positionClass = options.positionClass || 'toast-bottom-left';
+    opts.positionClass = options.positionClass || this._toastToken.config.positionClass || 'toast-bottom-left';
     opts.timeOut = (options.timeout || this._config.toastTimeout) * 1000;
 
     const icon = opts.icon ? `<div class="mat-icon material-icons">${ opts.icon }</div>` : '';

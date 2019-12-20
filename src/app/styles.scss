@@ -2,6 +2,13 @@
 
 .toast-container {
 
+  &.toast-top-center .ngx-toastr,
+  &.toast-bottom-center .ngx-toastr,
+  .ngx-toastr {
+    width: 400px;
+    max-width: 100%;
+  }
+
   .mat-toast-content {
     display: flex;
     align-items: center;
@@ -13,13 +20,12 @@
     color: #fff;
   }
 
-  .toast,
   .ngx-toastr {
     padding: 15px 15px 15px 25px;
     background-color: #030303;
     pointer-events: auto;
-    margin-bottom: 12px;
-
+    margin: 5px auto;
+    box-shadow: 0 0 5px #999999;
 
     &.toast-info {
       background-image: none !important;
@@ -145,11 +151,9 @@ fs-message-dialog {
     bottom: 0px;
     left: 0;
     right: 0;
-    padding: 4px 4px 0 4px;
 
-    .toast {
+    .ngx-toastr {
       width: 100%;
-      margin-bottom: 4px;
       padding: 10px;
     }
   }
