@@ -47,4 +47,8 @@ export class ModalExampleComponent {
       ]
     });
   }
+
+  closeAll() {
+    this.FsMessage.hide();
+  }
 }

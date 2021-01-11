@@ -33,4 +33,8 @@ export class ToastExampleComponent {
   icon() {
     this.FsMessage.success('Successfully Sent', { icon: 'send' });
   }
+
+  closeAll() {
+    this.FsMessage.hide();
+  }
 }

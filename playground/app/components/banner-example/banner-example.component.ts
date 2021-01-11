@@ -25,4 +25,8 @@ export class BannerExampleComponent {
   error() {
     this.FsMessage.error('Error message', { mode: MessageMode.Banner });
   }
+
+  closeAll() {
+    this.FsMessage.hide();
+  }
 }

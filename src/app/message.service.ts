@@ -69,6 +69,12 @@ export class FsMessage implements OnDestroy {
     return of();
   }
 
+  public hide(): void {
+    this.toastr.clear();
+    this.bannerMessages$.next();
+    this.matDialog.closeAll();
+  }
+
   public toast(type: string, message: string, options: MessageToastConfig): void {
 
     const opts: any = options;
