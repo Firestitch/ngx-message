@@ -71,12 +71,16 @@
 }
 
 .fs-message-banner {
+  display: flex;
+  align-self: start;
 
-  * {
+  .message {
     color: #fff;
+    width: 100%;
   }
 
   mat-icon {
+    color: #fff;
     margin-right: 10px;
   }
 

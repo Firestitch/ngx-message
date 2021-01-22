@@ -1,6 +1,7 @@
-<div fxLayout="row" fxLayoutAlign="start center" class="fs-message-banner fs-message-{{ type }}">
-  <div>
-    <mat-icon *ngIf="icon" class="mat-icon material-icons" role="img">{{ icon }}</mat-icon>
+<div class="fs-message-banner fs-message-{{ type }}">
+  <mat-icon *ngIf="icon" class="mat-icon material-icons" role="img">{{ icon }}</mat-icon>
+  <div class="message">
+    {{ message }}
+    <ng-content></ng-content>
   </div>
-  <div *ngIf="message">{{ message }}</div>
 </div>
