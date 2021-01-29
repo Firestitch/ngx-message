@@ -1,6 +1,6 @@
 import { MessageMode } from '../enums';
 
-export interface MessageConfig {
+export interface BaseMessageConfig {
   mode?: MessageMode,
   icon?: string,
   message?: string,

@@ -1,3 +1,5 @@
+import { MessageBannerConfig, MessageDialogConfig, MessageToastConfig } from './interfaces';
+
 export enum MessageType {
   Success = 'success',
   Info = 'info',
@@ -10,3 +12,5 @@ export enum MessageMode {
   Toast = 'toast',
   Banner = 'banner'
 }
+
+export type MessageConfig = MessageDialogConfig | MessageToastConfig | MessageBannerConfig;

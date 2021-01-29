@@ -1,5 +1,5 @@
-import { MessageConfig } from './message-config';
+import { BaseMessageConfig } from './message-config';
 
-export interface MessageBannerConfig extends MessageConfig {
+export interface MessageBannerConfig extends BaseMessageConfig {
   timeout?: number
 }

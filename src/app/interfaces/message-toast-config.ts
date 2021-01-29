@@ -1,6 +1,6 @@
-import { MessageConfig } from './message-config';
+import { BaseMessageConfig } from './message-config';
 
-export interface MessageToastConfig extends MessageConfig {
+export interface MessageToastConfig extends BaseMessageConfig {
   timeout?: number,
   progressBar?: boolean,
   progressAnimation?: 'decreasing' | 'increasing',
