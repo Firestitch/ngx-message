@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FsMessage, MessageMode } from '@firestitch/message';
+import { of, throwError } from 'rxjs';
 
 @Component({
   selector: 'modal-example',
@@ -32,16 +33,23 @@ export class ModalExampleComponent {
       mode: MessageMode.Dialog,
       buttons: [
         {
-          label: 'Custom Button',
+          label: 'Ok',
           color: 'primary',
           click: () => {
-            alert('Clicked');
+            return of(true);
           }
         },
         {
-          label: 'Another Custom Button',
+          label: 'Close',
           click: () => {
-            alert('Clicked');
+            alert('Close');
+          }
+        },
+        {
+          label: 'Keep Open',
+          click: () => {
+            alert('Keep Open');
+            return throwError(null);
           }
         }
       ]
