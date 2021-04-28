@@ -88,9 +88,9 @@ export class FsMessage implements OnDestroy {
 
   public banner(type: string, message: string, options: MessageBannerConfig): void {
     this.bannerMessages$.next({
-        type: type,
-        msg: message,
-        timeout: (options.timeout || this._config.bannerTimeout || 5) * 1000
+      type: type,
+      msg: message,
+      timeout: (options.timeout || this._config.bannerTimeout || 5) * 1000
     });
   }
 
@@ -110,7 +110,6 @@ export class FsMessage implements OnDestroy {
                       'fs-message-backdrop-' + type,
                       options.backdropClass], */
       backdropClass: options.backdropClass,
-      disableClose: !!options.buttons,
       width: options.width || this._config.dialogWidth,
       data: { type: type, message: message, options: options, icon: this.getIconName(type) },
       panelClass: [
