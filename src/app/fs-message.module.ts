@@ -38,7 +38,7 @@ import { MessageMode } from './enums';
 })
 export class FsMessageModule {
 
-  static forRoot(config: FsMessageConfig = {}): ModuleWithProviders {
+  static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModule> {
     return {
       ngModule: FsMessageModule,
       providers: [
