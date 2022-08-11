@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 import { merge } from 'lodash-es';
+import { ToastrModule } from 'ngx-toastr';
 
 import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { FsMessagesComponent } from './components/messages/messages.component';
@@ -49,6 +50,10 @@ export class FsMessageModule {
           useFactory: FsMessageConfigFactory,
           deps: [FS_MESSAGE_DEFAULT_CONFIG]
         },
+        ToastrModule.forRoot({
+          preventDuplicates: true,
+          positionClass: 'toast-bottom-right',
+        }).providers,
       ]
     };
   }
