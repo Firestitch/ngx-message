@@ -14,6 +14,7 @@ import { FsMessage } from './message.service';
 import { FsMessageConfig } from './interfaces/fs-message-config';
 import { FS_MESSAGE_CONFIG, FS_MESSAGE_DEFAULT_CONFIG } from './injectors/message-config';
 import { MessageMode } from './enums';
+import { FsMessageErrorComponent, FsMessageInfoComponent, FsMessageSuccessComponent, FsMessageWarningComponent } from './components';
 
 
 @NgModule({
@@ -25,15 +26,20 @@ import { MessageMode } from './enums';
   ],
   exports: [
     FsMessagesComponent,
-    FsMessageComponent
-  ],
-  entryComponents: [
-    FsMessageDialogComponent
+    FsMessageComponent,
+    FsMessageInfoComponent,
+    FsMessageWarningComponent,
+    FsMessageSuccessComponent,
+    FsMessageErrorComponent,
   ],
   declarations: [
     FsMessagesComponent,
     FsMessageComponent,
-    FsMessageDialogComponent
+    FsMessageDialogComponent,
+    FsMessageInfoComponent,
+    FsMessageWarningComponent,
+    FsMessageSuccessComponent,
+    FsMessageErrorComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

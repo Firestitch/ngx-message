@@ -18,3 +18,9 @@ export { MessageBannerConfig } from './app/interfaces/message-banner-config';
 export { MessageDialogConfig } from './app/interfaces/message-dialog-config';
 export { MessageToastConfig } from './app/interfaces/message-toast-config';
 
+export { 
+  FsMessageInfoComponent,
+  FsMessageWarningComponent,
+  FsMessageSuccessComponent,
+  FsMessageErrorComponent,
+} from './app/components';
