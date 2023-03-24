@@ -45,7 +45,7 @@ import { FsMessageErrorComponent, FsMessageInfoComponent, FsMessageSuccessCompon
 })
 export class FsMessageModule {
 
-  static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModule> {
+static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModule> {
     return {
       ngModule: FsMessageModule,
       providers: [

@@ -7,5 +7,11 @@ export interface FsMessageConfig {
   successMode?: MessageMode,
   errorMode?: MessageMode,
   infoMode?: MessageMode,
-  warningMode?: MessageMode
+  warningMode?: MessageMode,
+  defaultMessage?: {
+    success?: string,
+    wanring?: string,
+    error?: string,
+    info?: string,
+  }
 }

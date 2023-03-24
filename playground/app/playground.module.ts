@@ -22,7 +22,10 @@ import { ToastExampleComponent } from './components/toast-example/toast-example.
   imports: [
     BrowserModule,
     FsMessageModule.forRoot({
-      toastTimeout: 3
+      toastTimeout: 3,
+      defaultMessage: {
+        success: 'Saved changes',
+      }
     }),
     BrowserAnimationsModule,
     FsMaterialModule,

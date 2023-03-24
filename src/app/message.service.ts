@@ -32,23 +32,27 @@ export class FsMessage implements OnDestroy {
     @Inject(FS_MESSAGE_CONFIG) private _config: FsMessageConfig,
   ) { }
 
-  public success(message: string, options: MessageConfig = {}): Observable<any> {
+  public success(message?: string, options: MessageConfig = {}): Observable<any> {
     return this.show(MessageType.Success, message, { title: 'Success', mode: this._config.successMode, ...options });
   }
 
-  public info(message: string, options: MessageConfig = {}): Observable<any> {
+  public info(message?: string, options: MessageConfig = {}): Observable<any> {
     return this.show(MessageType.Info, message, { title: 'Information', mode: this._config.infoMode, ...options });
   }
 
-  public error(message: string, options: MessageConfig = {}): Observable<any> {
+  public error(message?: string, options: MessageConfig = {}): Observable<any> {
     return this.show(MessageType.Error, message, { title: 'Attention', mode: this._config.errorMode, ...options });
   }
 
-  public warning(message: string, options: MessageConfig = {}): Observable<any> {
+  public warning(message?: string, options: MessageConfig = {}): Observable<any> {
     return this.show(MessageType.Warning, message, { title: 'Warning', mode: this._config.warningMode, ...options });
   }
 
   public show(type: string, message: string, options: MessageConfig): Observable<any> {
+    if(!message && this._config.defaultMessage) {
+      message = this._config.defaultMessage[type];
+    }
+
     options = options || {};
     if (options.icon === undefined) {
       options.icon = this.getIconName(type);
