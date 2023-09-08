@@ -45,7 +45,7 @@
     "@compodoc/compodoc": "^1.1.10",
     "@firestitch/component-tools": "^12.0.14",
     "@firestitch/drawer": "^12.1.1",
-    "@firestitch/example": "^12.1.0",
+    "@firestitch/example": "^12.1.1",
     "@firestitch/iframe": "^12.0.7",
     "@firestitch/menu": "^12.0.1",
     "hammerjs": "^2.0.8",
