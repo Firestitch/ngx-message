@@ -10,7 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { FsMessagesComponent } from './components/messages/messages.component';
 import { FsMessageComponent } from './components/message/message.component';
-import { FsMessage } from './message.service';
+import { FsMessage } from './services/message.service';
 import { FsMessageConfig } from './interfaces/fs-message-config';
 import { FS_MESSAGE_CONFIG, FS_MESSAGE_DEFAULT_CONFIG } from './injectors/message-config';
 import { MessageMode } from './enums';
@@ -64,7 +64,6 @@ static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModul
     };
   }
 }
-
 
 export function FsMessageConfigFactory(config: FsMessageConfig) {
   return merge({

@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { remove } from 'lodash-es';
 
-import { FsMessage } from '../../message.service';
+import { FsMessage } from '../../services/message.service';
 
 
 @Component({

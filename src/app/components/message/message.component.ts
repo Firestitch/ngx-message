@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MessageType } from '../../enums';
-import { FsMessage } from '../../message.service';
+import { FsMessage } from '../../services/message.service';
 
 @Component({
   selector: 'fs-message',

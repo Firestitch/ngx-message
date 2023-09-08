@@ -10,7 +10,8 @@ export { FsMessagesComponent } from './app/components/messages/messages.componen
 export { FsMessageComponent } from './app/components/message/message.component';
 
 // Services
-export { FsMessage } from './app/message.service';
+export { FsMessage } from './app/services/message.service';
+export { FsErrorMessage } from './app/services/error-message.service';
 export { MessageMode, MessageType, MessageConfig } from './app/enums';
 
 export { FsMessageConfig } from './app/interfaces/fs-message-config';

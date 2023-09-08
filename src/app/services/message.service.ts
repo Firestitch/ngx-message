@@ -7,13 +7,13 @@ import { Observable, Subject, of } from 'rxjs';
 
 import { ToastrService, TOAST_CONFIG, ToastToken } from 'ngx-toastr';
 
-import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
-import { MessageType, MessageMode, MessageConfig } from './enums';
-import { FS_MESSAGE_CONFIG } from './injectors/message-config';
-import { FsMessageConfig } from './interfaces';
-import { MessageDialogConfig } from './interfaces/message-dialog-config';
-import { MessageToastConfig } from './interfaces/message-toast-config';
-import { MessageBannerConfig } from './interfaces/message-banner-config';
+import { FsMessageDialogComponent } from '../components/message-dialog/message-dialog.component';
+import { MessageType, MessageMode, MessageConfig } from '../enums';
+import { FS_MESSAGE_CONFIG } from '../injectors/message-config';
+import { FsMessageConfig } from '../interfaces';
+import { MessageDialogConfig } from '../interfaces/message-dialog-config';
+import { MessageToastConfig } from '../interfaces/message-toast-config';
+import { MessageBannerConfig } from '../interfaces/message-banner-config';
 
 
 @Injectable()
