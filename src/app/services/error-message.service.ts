@@ -54,7 +54,7 @@ export class FsErrorMessage {
   }
 
   public processHttpErrorResponse(e: HttpErrorResponse): Observable<any> {
-    if (e.status >= 500 || !e.status) {
+    if (e.status > 500 || !e.status) {
       return of(true);
     }
 
