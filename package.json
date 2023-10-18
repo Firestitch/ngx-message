@@ -47,6 +47,7 @@
     "@firestitch/drawer": "^12.1.1",
     "@firestitch/example": "^12.1.1",
     "@firestitch/iframe": "^12.0.7",
+    "@firestitch/lint": "^12.0.18",
     "@firestitch/menu": "^12.0.1",
     "hammerjs": "^2.0.8",
     "lodash-es": "^4.17.15",
