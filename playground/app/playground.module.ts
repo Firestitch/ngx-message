@@ -7,9 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule } from '@firestitch/message';
 
-import { ToastrModule } from 'ngx-toastr';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { FsMaterialModule } from './material.module';
 import { BannerExampleComponent } from './components/banner-example/banner-example.component';
 import { BannerInlineExampleComponent } from './components/banner-inline-example/banner-inline-example.component';
@@ -31,7 +28,6 @@ import { ToastExampleComponent } from './components/toast-example/toast-example.
     FsMaterialModule,
     FormsModule,
     FsExampleModule.forRoot(),
-    FlexLayoutModule,
   ],
   declarations: [
     AppComponent,
