@@ -4,7 +4,7 @@ import { FsMessage, MessageMode } from '@firestitch/message';
 @Component({
   selector: 'toast-example',
   templateUrl: 'toast-example.component.html',
-  styleUrls: [ 'toast-example.component.scss' ]
+  styleUrls: ['toast-example.component.scss']
 })
 export class ToastExampleComponent {
 
@@ -23,7 +23,7 @@ export class ToastExampleComponent {
   }
 
   success() {
-    this.FsMessage.success('<div class="heading">Heading</div>Success message');
+    this.FsMessage.success('Set shaun engelbrecht as a Assign Person as a Assign Person');
   }
 
   progress() {
