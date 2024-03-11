@@ -23,7 +23,7 @@ export class ToastExampleComponent {
   }
 
   success() {
-    this.FsMessage.success('Set shaun engelbrecht as a Assign Person as a Assign Person');
+    this.FsMessage.success('<div class="heading">Heading</div>Success message');
   }
 
   progress() {
