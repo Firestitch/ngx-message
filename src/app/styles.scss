@@ -304,6 +304,7 @@ button.toast-close-button {
   mat-icon {
     color: #fff;
     margin-right: 10px;
+    flex-shrink: 0;
   }
 
   &:nth-child(1n+2) {
