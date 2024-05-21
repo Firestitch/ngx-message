@@ -16,7 +16,9 @@ import { MessageToastConfig } from '../interfaces/message-toast-config';
 import { MessageBannerConfig } from '../interfaces/message-banner-config';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class FsMessage implements OnDestroy {
 
   public bannerMessages$ = new Subject();

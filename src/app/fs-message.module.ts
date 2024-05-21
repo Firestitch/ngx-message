@@ -49,7 +49,6 @@ static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModul
     return {
       ngModule: FsMessageModule,
       providers: [
-        FsMessage,
         { provide: FS_MESSAGE_DEFAULT_CONFIG, useValue: config },
         {
           provide: FS_MESSAGE_CONFIG,
