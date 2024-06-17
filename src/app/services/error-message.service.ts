@@ -72,8 +72,14 @@ export class FsErrorMessage {
     } else if (typeof e.error === 'string') {
       message = `<pre>${e.error}</pre>`;
       config.width = '90%';
-    } else if (e.statusText) {
-      message = e.statusText;
+    } else {
+      message = 'Please check your network connection and try again.';
+      config.title = 'Poor Connection';
+      config.mode = MessageMode.Toast;
+
+      if(e.statusText) {
+        console.error(e.statusText);
+      }
     }
 
     return this._message.error(message, config);
