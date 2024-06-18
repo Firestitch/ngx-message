@@ -67,6 +67,10 @@ export class FsErrorMessage {
       return this.showErrorMessage(e.error.message, exception);
     }
 
+    if(e.headers.has('X-System-Mode-Debug')) {
+      return this.showErrorMessage(e.error.text);
+    }
+
     if(e.error.text) {
       console.error(e.error.text, reason);
     } else if (typeof e.error === 'string') {
