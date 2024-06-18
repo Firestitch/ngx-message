@@ -59,7 +59,7 @@ export class FsErrorMessage {
     }
 
     const ignore = ['Framework\\Db\\Exception\\DbConnectionException']
-      .some((cls) => cls.indexOf(e.error?.exception?.class) !== -1);
+      .some((cls) => cls.indexOf(e.error?.data?.exception?.class) !== -1);
 
     if (e.error?.message && !ignore) {
       return this.showErrorMessage(e.error.message, e.error.exception);
