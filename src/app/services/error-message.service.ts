@@ -58,31 +58,23 @@ export class FsErrorMessage {
       return of(true);
     }
 
-    if (e.error?.message) {
+    const ignore = ['Framework\\Db\\Exception\\DbConnectionException']
+      .some((cls) => cls.indexOf(e.error?.exception?.class) !== -1);
+
+    if (e.error?.message && !ignore) {
       return this.showErrorMessage(e.error.message, e.error.exception);
     }
 
-    let message;
-    const config: MessageDialogConfig = {};
-
-    if (e.error?.text) {
-      e.error.text = e.error.text.trim().replace(/(^<br[^>]*>|<br[^>]*>$)/ig, '');
-      message = `<pre>${e.error.text}</pre>`;
-      config.width = '90%';
+    if(e.error.text) {
+      console.error(e.error.text);
     } else if (typeof e.error === 'string') {
-      message = `<pre>${e.error}</pre>`;
-      config.width = '90%';
-    } else {
-      message = 'Please check your network connection and try again.';
-      config.title = 'Poor Connection';
-      config.mode = MessageMode.Toast;
-
-      if(e.statusText) {
-        console.error(e.statusText);
-      }
+      console.error(e.error);
+    } else if(e.statusText) {
+      console.error(e.statusText);
     }
 
-    return this._message.error(message, config);
+    return this._message
+      .error('Please check your network connection and try again.', { mode: MessageMode.Toast });
   }
 
   public showError(message: string, config: MessageDialogConfig = {}): Observable<any> {
