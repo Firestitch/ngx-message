@@ -58,19 +58,21 @@ export class FsErrorMessage {
       return of(true);
     }
 
+    const exception = e.error?.exception;
+    const reason = e.error?.reason;
     const ignore = ['Framework\\Db\\Exception\\DbConnectionException']
-      .some((cls) => cls.indexOf(e.error?.data?.exception?.class) !== -1);
+      .some((cls) => cls.indexOf(exception?.class) !== -1);
 
     if (e.error?.message && !ignore) {
-      return this.showErrorMessage(e.error.message, e.error.exception);
+      return this.showErrorMessage(e.error.message, exception);
     }
 
     if(e.error.text) {
-      console.error(e.error.text);
+      console.error(e.error.text, reason);
     } else if (typeof e.error === 'string') {
-      console.error(e.error);
+      console.error(e.error, reason);
     } else if(e.statusText) {
-      console.error(e.statusText);
+      console.error(e.statusText, reason);
     }
 
     return this._message
