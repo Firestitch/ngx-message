@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+
 import { MessageType } from '../../enums';
 import { FsMessage } from '../../services/message.service';
 
@@ -13,12 +14,12 @@ export class FsMessageComponent implements OnInit {
   @Input() public message: string;
 
   @Input('fsType')
-  set fsType(value) {
+  public set fsType(value) {
     this.type = value;
   }
 
   @Input('fsMessage')
-  set fsMessage(value) {
+  public set fsMessage(value) {
     this.message = value;
   }
 

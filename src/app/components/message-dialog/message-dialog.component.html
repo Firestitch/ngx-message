@@ -3,7 +3,9 @@
     <mat-icon>{{ data.icon }}</mat-icon>
     <span>{{ data.options.title }}</span>
   </div>
-  <mat-dialog-content [innerHTML]="data.message"></mat-dialog-content>
+  <mat-dialog-content>
+    <div class="message" [innerHTML]="data.message"></div>
+  </mat-dialog-content>
   <mat-dialog-actions>
     <button mat-button (click)="hide()" *ngIf="!data.options.buttons" color="primary">OK</button>
     <button mat-button *ngFor="let button of data.options.buttons || []" (click)="buttonClick(button)" [color]="button.color">{{button.label}}</button>

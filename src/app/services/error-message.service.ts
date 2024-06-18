@@ -4,9 +4,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 
 import { HttpErrorResponse } from '@angular/common/http';
-import { FsMessage } from './message.service';
-import { MessageDialogConfig } from '../interfaces';
+
 import { MessageMode } from '../enums';
+import { MessageDialogConfig } from '../interfaces';
+
+import { FsMessage } from './message.service';
 
 
 @Injectable({

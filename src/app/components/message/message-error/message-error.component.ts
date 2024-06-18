@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { MessageType } from '../../../enums';
 import { FsMessageComponent } from '../message.component';
 

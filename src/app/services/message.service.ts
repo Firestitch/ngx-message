@@ -1,19 +1,19 @@
-import { Injectable, OnDestroy, Inject } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 
-import { takeUntil } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { ToastrService, TOAST_CONFIG, ToastToken } from 'ngx-toastr';
+import { TOAST_CONFIG, ToastToken, ToastrService } from 'ngx-toastr';
 
 import { FsMessageDialogComponent } from '../components/message-dialog/message-dialog.component';
-import { MessageType, MessageMode, MessageConfig } from '../enums';
+import { MessageConfig, MessageMode, MessageType } from '../enums';
 import { FS_MESSAGE_CONFIG } from '../injectors/message-config';
 import { FsMessageConfig } from '../interfaces';
+import { MessageBannerConfig } from '../interfaces/message-banner-config';
 import { MessageDialogConfig } from '../interfaces/message-dialog-config';
 import { MessageToastConfig } from '../interfaces/message-toast-config';
-import { MessageBannerConfig } from '../interfaces/message-banner-config';
 
 
 @Injectable({
@@ -21,15 +21,14 @@ import { MessageBannerConfig } from '../interfaces/message-banner-config';
 })
 export class FsMessage implements OnDestroy {
 
-  public bannerMessages$ = new Subject();
-
   private _dialogs = 0;
   private _dialogsMessagesQueue = [];
   private _destroy$ = new Subject<void>();
+  private _bannerMessages$ = new Subject();
 
   constructor(
-    private toastr: ToastrService,
-    private matDialog: MatDialog,
+    private _toastr: ToastrService,
+    private _matDialog: MatDialog,
     @Inject(TOAST_CONFIG) private _toastToken: ToastToken,
     @Inject(FS_MESSAGE_CONFIG) private _config: FsMessageConfig,
   ) { }
@@ -75,9 +74,9 @@ export class FsMessage implements OnDestroy {
   }
 
   public hide(): void {
-    this.toastr.clear();
-    this.bannerMessages$.next();
-    this.matDialog.closeAll();
+    this._toastr.clear();
+    this._bannerMessages$.next();
+    this._matDialog.closeAll();
   }
 
   public toast(type: string, message: string, options: MessageToastConfig): void {
@@ -89,14 +88,14 @@ export class FsMessage implements OnDestroy {
     const icon = opts.icon ? `<div class="mat-icon material-icons">${ opts.icon }</div>` : '';
     const template = `<div class="mat-toast-content">${icon}<div class="message">${message}</div></div>`;
 
-    this.toastr[type](template, '', opts);
+    this._toastr[type](template, '', opts);
   }
 
   public banner(type: string, message: string, options: MessageBannerConfig): void {
-    this.bannerMessages$.next({
+    this._bannerMessages$.next({
       type: type,
       msg: message,
-      timeout: (options.timeout || this._config.bannerTimeout || 5) * 1000
+      timeout: (options.timeout || this._config.bannerTimeout || 5) * 1000,
     });
   }
 
@@ -110,7 +109,7 @@ export class FsMessage implements OnDestroy {
     this._dialogsMessagesQueue.push(typeMessage);
     this._dialogs++;
 
-    const dialogRef = this.matDialog.open(FsMessageDialogComponent, {
+    const dialogRef = this._matDialog.open(FsMessageDialogComponent, {
       /* Waiting for MatDialog to support array of classes like panelClass
       backdropClass: ['fs-message-backdrop',
                       'fs-message-backdrop-' + type,
@@ -120,7 +119,7 @@ export class FsMessage implements OnDestroy {
       data: { type: type, message: message, options: options, icon: this.getIconName(type) },
       panelClass: [
         'fs-message-pane',
-        'fs-message-pane-' + type,
+        `fs-message-pane-${  type}`,
         options.panelClass,
       ],
     });
@@ -157,6 +156,10 @@ export class FsMessage implements OnDestroy {
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
+  }
+
+  public get bannerMessages$(): Observable<any> {
+    return this._bannerMessages$.asObservable();
   }
 
 }

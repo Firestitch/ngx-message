@@ -3,3 +3,8 @@
   flex-direction: row;
   align-items: center;
 }
+
+
+.message {
+  white-space: pre-wrap;
+}

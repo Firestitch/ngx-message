@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { FsMessage, MessageMode } from '@firestitch/message';
+
 
 @Component({
   selector: 'banner-example',
-  templateUrl: 'banner-example.component.html',
-  styleUrls: [ 'banner-example.component.css' ]
+  templateUrl: './banner-example.component.html',
+  styleUrls: ['./banner-example.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BannerExampleComponent {
 
-  constructor(private FsMessage: FsMessage) { }
+  constructor(private _message: FsMessage) { }
 
-  success() {
-    this.FsMessage.success('Success message', { mode: MessageMode.Banner });
+  public success() {
+    this._message.success('Success message', { mode: MessageMode.Banner });
   }
 
-  info() {
-    this.FsMessage.info('Info message', { mode: MessageMode.Banner });
+  public info() {
+    this._message.info('Info message', { mode: MessageMode.Banner });
   }
 
-  warning() {
-    this.FsMessage.warning('Warning message', { mode: MessageMode.Banner });
+  public warning() {
+    this._message.warning('Warning message', { mode: MessageMode.Banner });
   }
 
-  error() {
-    this.FsMessage.error('Error message', { mode: MessageMode.Banner });
+  public error() {
+    this._message.error('Error message', { mode: MessageMode.Banner });
   }
 
-  closeAll() {
-    this.FsMessage.hide();
+  public closeAll() {
+    this._message.hide();
   }
 }

@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, OnDestroy } from '@angular/core';
+
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { isObservable, Observable, of, Subject } from 'rxjs';
+
+import { isObservable, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -15,11 +17,11 @@ export class FsMessageDialogComponent implements OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<FsMessageDialogComponent>,
+    private _dialogRef: MatDialogRef<FsMessageDialogComponent>,
   ) {}
 
   public hide() {
-    this.dialogRef.close();
+    this._dialogRef.close();
   }
 
   public buttonClick(button) {
