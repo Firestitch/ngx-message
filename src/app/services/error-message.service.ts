@@ -70,7 +70,9 @@ export class FsErrorMessage {
     }
 
     if(e.headers.has('X-System-Mode-Debug')) {
-      return this.showErrorMessage(e.error.text);
+      const message = typeof e.error === 'string' ? e.error : (e.error?.text || e.statusText);
+
+      return this.showErrorMessage(message);
     }
 
     if(e.error.text) {
