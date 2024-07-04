@@ -109,6 +109,12 @@ export class FsMessage implements OnDestroy {
     this._dialogsMessagesQueue.push(typeMessage);
     this._dialogs++;
 
+    const activeElement: any = document.activeElement;
+
+    if(activeElement?.blur) {
+      activeElement.blur();
+    }
+
     const dialogRef = this._matDialog.open(FsMessageDialogComponent, {
       /* Waiting for MatDialog to support array of classes like panelClass
       backdropClass: ['fs-message-backdrop',
