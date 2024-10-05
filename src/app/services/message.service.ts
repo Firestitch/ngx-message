@@ -75,7 +75,7 @@ export class FsMessage implements OnDestroy {
 
   public hide(): void {
     this._toastr.clear();
-    this._bannerMessages$.next();
+    this._bannerMessages$.next(null);
     this._matDialog.closeAll();
   }
 
@@ -160,7 +160,7 @@ export class FsMessage implements OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this._destroy$.next();
+    this._destroy$.next(null);
     this._destroy$.complete();
   }
 
