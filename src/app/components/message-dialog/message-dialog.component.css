@@ -1,7 +1,8 @@
-:host .mat-dialog-title {
+:host .mat-mdc-dialog-title {
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-top: 9px;
 }
 
 
