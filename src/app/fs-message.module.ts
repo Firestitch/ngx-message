@@ -1,5 +1,6 @@
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule } from '@angular/core';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,14 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { merge } from 'lodash-es';
 import { ToastrModule } from 'ngx-toastr';
 
-import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
-import { FsMessagesComponent } from './components/messages/messages.component';
-import { FsMessageComponent } from './components/message/message.component';
-import { FsMessage } from './services/message.service';
-import { FsMessageConfig } from './interfaces/fs-message-config';
-import { FS_MESSAGE_CONFIG, FS_MESSAGE_DEFAULT_CONFIG } from './injectors/message-config';
-import { MessageMode } from './enums';
 import { FsMessageErrorComponent, FsMessageInfoComponent, FsMessageSuccessComponent, FsMessageWarningComponent } from './components';
+import { FsMessageDialogComponent } from './components/message-dialog/message-dialog.component';
+import { FsMessageComponent } from './components/message/message.component';
+import { FsMessagesComponent } from './components/messages/messages.component';
+import { ToastMessageComponent } from './components/toast-message';
+import { MessageMode } from './enums';
+import { FS_MESSAGE_CONFIG, FS_MESSAGE_DEFAULT_CONFIG } from './injectors/message-config';
+import { FsMessageConfig } from './interfaces/fs-message-config';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { FsMessageErrorComponent, FsMessageInfoComponent, FsMessageSuccessCompon
     CommonModule,
     MatDialogModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   exports: [
     FsMessagesComponent,
@@ -40,12 +41,13 @@ import { FsMessageErrorComponent, FsMessageInfoComponent, FsMessageSuccessCompon
     FsMessageWarningComponent,
     FsMessageSuccessComponent,
     FsMessageErrorComponent,
+    ToastMessageComponent,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FsMessageModule {
 
-static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModule> {
+  public static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModule> {
     return {
       ngModule: FsMessageModule,
       providers: [
@@ -53,13 +55,14 @@ static forRoot(config: FsMessageConfig = {}): ModuleWithProviders<FsMessageModul
         {
           provide: FS_MESSAGE_CONFIG,
           useFactory: FsMessageConfigFactory,
-          deps: [FS_MESSAGE_DEFAULT_CONFIG]
+          deps: [FS_MESSAGE_DEFAULT_CONFIG],
         },
         ToastrModule.forRoot({
           preventDuplicates: true,
           positionClass: 'toast-bottom-right',
+          toastComponent: ToastMessageComponent,
         }).providers,
-      ]
+      ],
     };
   }
 }
@@ -72,6 +75,6 @@ export function FsMessageConfigFactory(config: FsMessageConfig) {
     successMode: MessageMode.Toast,
     errorMode: MessageMode.Dialog,
     warningMode: MessageMode.Toast,
-    infoMode: MessageMode.Toast
+    infoMode: MessageMode.Toast,
   }, config);
 }

@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { TOAST_CONFIG, ToastToken, ToastrService } from 'ngx-toastr';
 
 import { FsMessageDialogComponent } from '../components/message-dialog/message-dialog.component';
+import { ToastMessageComponent } from '../components/toast-message/toast-message.component';
 import { MessageConfig, MessageMode, MessageType } from '../enums';
 import { FS_MESSAGE_CONFIG } from '../injectors/message-config';
 import { FsMessageConfig } from '../interfaces';
@@ -82,13 +83,11 @@ export class FsMessage implements OnDestroy {
   public toast(type: string, message: string, options: MessageToastConfig): void {
     const opts: any = options;
     opts.enableHtml = true;
+    opts.toastComponent = ToastMessageComponent;
     opts.positionClass = options.positionClass || this._toastToken.config.positionClass || 'toast-bottom-left';
     opts.timeOut = (options.timeout || this._config.toastTimeout) * 1000;
 
-    const icon = opts.icon ? `<div class="mat-icon material-icons">${ opts.icon }</div>` : '';
-    const template = `<div class="mat-toast-content">${icon}<div class="message">${message}</div></div>`;
-
-    this._toastr[type](template, '', opts);
+    this._toastr[type](message, '', opts);
   }
 
   public banner(type: string, message: string, options: MessageBannerConfig): void {
@@ -146,17 +145,24 @@ export class FsMessage implements OnDestroy {
     return dialogRef.afterClosed();
   }
 
-  public getIconName(type: string): string {
-    switch (type) {
-      case MessageType.Success:
-        return 'done';
-      case MessageType.Error:
-        return 'report_problem';
-      case MessageType.Info:
-        return 'info';
-      case MessageType.Warning:
-        return 'report_problem';
+  public getIconName(type: any): string {
+    if (type === MessageType.Success) {
+      return 'done';
     }
+
+    if (type === MessageType.Error) {
+      return 'report_problem';
+    }
+
+    if (type === MessageType.Info) {
+      return 'info';
+    }
+
+    if (type === MessageType.Warning) {
+      return 'report_problem';
+    }
+
+    return '';
   }
 
   public ngOnDestroy(): void {

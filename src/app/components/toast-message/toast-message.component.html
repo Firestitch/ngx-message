@@ -1,0 +1,11 @@
+<div class="message-container">
+  @if (icon) {
+    <mat-icon>
+      {{ icon }}
+    </mat-icon>
+  }
+  <div
+    class="message"
+    [innerHTML]="toastPackage.message">
+  </div>
+</div>
