@@ -59,7 +59,7 @@ export class FsMessageModule {
         },
         ToastrModule.forRoot({
           preventDuplicates: true,
-          positionClass: 'toast-bottom-right',
+          positionClass: config.positionClass || 'toast-bottom-right',
           toastComponent: ToastMessageComponent,
         }).providers,
       ],

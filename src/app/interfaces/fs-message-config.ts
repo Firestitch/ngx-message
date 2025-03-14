@@ -8,6 +8,7 @@ export interface FsMessageConfig {
   errorMode?: MessageMode,
   infoMode?: MessageMode,
   warningMode?: MessageMode,
+  positionClass?: string,
   defaultMessage?: {
     success?: string,
     wanring?: string,
