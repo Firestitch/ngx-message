@@ -37,7 +37,7 @@ export class FsErrorMessage {
         },
         {
           click: () => {
-            this._message.info(`<pre>${exception.trace.join('<br>')}</pre>`,
+            this._message.info(`<pre>${this._buildDebugMessage(exception)}</pre>`,
               {
                 title: 'Debug Message',
                 width: '90%',
@@ -104,6 +104,20 @@ export class FsErrorMessage {
     };
 
     return this._message.error(`<pre>${message}</pre>`, config);
+  }
+
+  private _buildDebugMessage(exception: any): string {
+    let message = `<p>${exception.message} (${exception.class})</p>`;
+
+    if (exception.trace) {
+      message += exception.trace.join('<br>');
+    }
+    
+    if(exception.previous) {
+      message += `<br><br>${this._buildDebugMessage(exception.previous)}`;
+    }
+
+    return message;
   }
 
 }
