@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 
@@ -24,13 +24,11 @@ import { MatButton } from '@angular/material/button';
     ],
 })
 export class FsMessageDialogComponent implements OnDestroy {
+  data = inject(MAT_DIALOG_DATA);
+  private _dialogRef = inject<MatDialogRef<FsMessageDialogComponent>>(MatDialogRef);
+
 
   private _destroy$ = new Subject();
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private _dialogRef: MatDialogRef<FsMessageDialogComponent>,
-  ) {}
 
   public hide() {
     this._dialogRef.close();

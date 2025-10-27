@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 
 import { MessageType } from '../../enums';
 import { FsMessage } from '../../services/message.service';
@@ -12,6 +12,8 @@ import { MatIcon } from '@angular/material/icon';
     imports: [MatIcon],
 })
 export class FsMessageComponent implements OnInit {
+  private _fsMessage = inject(FsMessage);
+
 
   @Input() public type = MessageType.Info;
   @Input() public message: string;
@@ -27,8 +29,6 @@ export class FsMessageComponent implements OnInit {
   }
 
   public icon = 'info';
-
-  constructor(private _fsMessage: FsMessage) { }
 
   public ngOnInit() {
     this.icon = this._fsMessage.getIconName(this.type);

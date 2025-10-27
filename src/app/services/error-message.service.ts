@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 
 import { Observable, of, throwError } from 'rxjs';
@@ -15,10 +15,8 @@ import { FsMessage } from './message.service';
   providedIn: 'root',
 })
 export class FsErrorMessage {
+  private _message = inject(FsMessage);
 
-  constructor(
-    private _message: FsMessage,
-  ) { }
 
   public showErrorMessage(message: string, exception?: any): Observable<any> {
     const config: MessageDialogConfig = {};

@@ -1,24 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
-import { Toast, ToastPackage, ToastrService } from 'ngx-toastr';
 import { MatIcon } from '@angular/material/icon';
 
+import { Toast, ToastPackage } from 'ngx-toastr';
+
 @Component({
-    templateUrl: './toast-message.component.html',
-    styleUrl: './toast-message.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [MatIcon],
+  templateUrl: './toast-message.component.html',
+  styleUrl: './toast-message.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatIcon],
 })
-export class ToastMessageComponent extends Toast {
-
+export class ToastMessageComponent extends Toast implements OnInit  {
+  
   public icon: string;
+  private _toastPackage = inject(ToastPackage);
 
-  constructor( 
-    protected _toastrService: ToastrService,
-    public toastPackage: ToastPackage,
-  ) {
-    super(_toastrService, toastPackage);
-    this.icon = (toastPackage.config as any).icon;
+  public ngOnInit(): void {
+    this.icon = (this._toastPackage.config as any).icon;
   }
 }

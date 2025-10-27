@@ -1,4 +1,4 @@
-import { Inject, Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, inject } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -21,18 +21,16 @@ import { MessageToastConfig } from '../interfaces/message-toast-config';
   providedIn: 'root',
 })
 export class FsMessage implements OnDestroy {
+  private _toastr = inject(ToastrService);
+  private _matDialog = inject(MatDialog);
+  private _toastToken = inject<ToastToken>(TOAST_CONFIG);
+  private _config = inject<FsMessageConfig>(FS_MESSAGE_CONFIG);
+
 
   private _dialogs = 0;
   private _dialogsMessagesQueue = [];
   private _destroy$ = new Subject<void>();
   private _bannerMessages$ = new Subject();
-
-  constructor(
-    private _toastr: ToastrService,
-    private _matDialog: MatDialog,
-    @Inject(TOAST_CONFIG) private _toastToken: ToastToken,
-    @Inject(FS_MESSAGE_CONFIG) private _config: FsMessageConfig,
-  ) { }
 
   public success(message?: string, options: MessageConfig = {}): Observable<any> {
     return this.show(MessageType.Success, message, { title: 'Success', mode: this._config.successMode, ...options });

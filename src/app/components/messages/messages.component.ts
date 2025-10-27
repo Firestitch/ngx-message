@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -23,15 +17,13 @@ import { FsMessageComponent } from '../message/message.component';
     imports: [FsMessageComponent],
 })
 export class FsMessagesComponent implements OnInit, OnDestroy {
+  private _message = inject(FsMessage);
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   public messages = [];
 
   private _destroy$ = new Subject<void>();
-
-  constructor(
-    private _message: FsMessage,
-    private _cdRef: ChangeDetectorRef,
-  ) {}
 
   public ngOnInit () {
     this._message

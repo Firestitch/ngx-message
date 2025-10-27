@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { FsMessage, MessageMode } from '@firestitch/message';
 
@@ -15,8 +15,8 @@ import { MatIcon } from '@angular/material/icon';
     imports: [MatButton, MatIcon],
 })
 export class ModalExampleComponent {
+  private _message = inject(FsMessage);
 
-  constructor(private _message: FsMessage) { }
 
   public error() {
     this._message.error('Error message<br><br>Custom HTML', { mode: MessageMode.Dialog });

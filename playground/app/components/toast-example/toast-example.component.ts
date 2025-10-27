@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { FsMessage, MessageMode } from '@firestitch/message';
 import { MatButton } from '@angular/material/button';
@@ -13,8 +13,8 @@ import { MatIcon } from '@angular/material/icon';
     imports: [MatButton, MatIcon],
 })
 export class ToastExampleComponent {
+  private _message = inject(FsMessage);
 
-  constructor(private _message: FsMessage) { }
 
   public error() {
     this._message.error('<div class="heading">Heading</div>Error message', { mode: MessageMode.Toast });
