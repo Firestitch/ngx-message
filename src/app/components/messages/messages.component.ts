@@ -16,7 +16,7 @@ import { FsMessage } from '../../services/message.service';
 
 @Component({
   selector: 'fs-messages',
-  template: '<fs-message *ngFor="let item of messages" [fsType]="item.type" [fsMessage]="item.msg"></fs-message>',
+  template: '@for (item of messages; track item) {<fs-message [fsType]="item.type" [fsMessage]="item.msg"></fs-message>}',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsMessagesComponent implements OnInit, OnDestroy {

@@ -7,7 +7,11 @@
     <div class="message" [innerHTML]="data.message"></div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button (click)="hide()" *ngIf="!data.options.buttons" color="primary">OK</button>
-    <button mat-button *ngFor="let button of data.options.buttons || []" (click)="buttonClick(button)" [color]="button.color">{{button.label}}</button>
+    @if (!data.options.buttons) {
+      <button mat-button (click)="hide()" color="primary">OK</button>
+    }
+    @for (button of data.options.buttons || []; track button) {
+      <button mat-button (click)="buttonClick(button)" [color]="button.color">{{button.label}}</button>
+    }
   </mat-dialog-actions>
 </div>
