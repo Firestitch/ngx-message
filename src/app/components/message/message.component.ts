@@ -2,11 +2,14 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { MessageType } from '../../enums';
 import { FsMessage } from '../../services/message.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'fs-message',
-  templateUrl: './message.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-message',
+    templateUrl: './message.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [MatIcon],
 })
 export class FsMessageComponent implements OnInit {
 

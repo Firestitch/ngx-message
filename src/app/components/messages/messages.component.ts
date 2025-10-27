@@ -12,12 +12,15 @@ import { takeUntil } from 'rxjs/operators';
 import { remove } from 'lodash-es';
 
 import { FsMessage } from '../../services/message.service';
+import { FsMessageComponent } from '../message/message.component';
 
 
 @Component({
-  selector: 'fs-messages',
-  template: '@for (item of messages; track item) {<fs-message [fsType]="item.type" [fsMessage]="item.msg"></fs-message>}',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-messages',
+    template: '@for (item of messages; track item) {<fs-message [fsType]="item.type" [fsMessage]="item.msg"></fs-message>}',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FsMessageComponent],
 })
 export class FsMessagesComponent implements OnInit, OnDestroy {
 

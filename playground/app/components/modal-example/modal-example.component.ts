@@ -3,12 +3,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FsMessage, MessageMode } from '@firestitch/message';
 
 import { of, throwError } from 'rxjs';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'modal-example',
-  templateUrl: './modal-example.component.html',
-  styleUrls: ['./modal-example.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'modal-example',
+    templateUrl: './modal-example.component.html',
+    styleUrls: ['./modal-example.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [MatButton, MatIcon],
 })
 export class ModalExampleComponent {
 

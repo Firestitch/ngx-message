@@ -1,12 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { FsMessage, MessageMode } from '@firestitch/message';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'toast-example',
-  templateUrl: './toast-example.component.html',
-  styleUrls: ['./toast-example.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'toast-example',
+    templateUrl: './toast-example.component.html',
+    styleUrls: ['./toast-example.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [MatButton, MatIcon],
 })
 export class ToastExampleComponent {
 

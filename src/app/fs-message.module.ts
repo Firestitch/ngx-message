@@ -19,31 +19,29 @@ import { FsMessageConfig } from './interfaces/fs-message-config';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatButtonModule,
-  ],
-  exports: [
-    FsMessagesComponent,
-    FsMessageComponent,
-    FsMessageInfoComponent,
-    FsMessageWarningComponent,
-    FsMessageSuccessComponent,
-    FsMessageErrorComponent,
-  ],
-  declarations: [
-    FsMessagesComponent,
-    FsMessageComponent,
-    FsMessageDialogComponent,
-    FsMessageInfoComponent,
-    FsMessageWarningComponent,
-    FsMessageSuccessComponent,
-    FsMessageErrorComponent,
-    ToastMessageComponent,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [
+        CommonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        FsMessagesComponent,
+        FsMessageComponent,
+        FsMessageDialogComponent,
+        FsMessageInfoComponent,
+        FsMessageWarningComponent,
+        FsMessageSuccessComponent,
+        FsMessageErrorComponent,
+        ToastMessageComponent,
+    ],
+    exports: [
+        FsMessagesComponent,
+        FsMessageComponent,
+        FsMessageInfoComponent,
+        FsMessageWarningComponent,
+        FsMessageSuccessComponent,
+        FsMessageErrorComponent,
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FsMessageModule {
 

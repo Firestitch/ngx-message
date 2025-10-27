@@ -1,13 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { FsMessage, MessageMode } from '@firestitch/message';
+import { FsMessagesComponent } from '../../../../src/app/components/messages/messages.component';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
-  selector: 'banner-example',
-  templateUrl: './banner-example.component.html',
-  styleUrls: ['./banner-example.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'banner-example',
+    templateUrl: './banner-example.component.html',
+    styleUrls: ['./banner-example.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsMessagesComponent,
+        MatButton,
+        MatIcon,
+    ],
 })
 export class BannerExampleComponent {
 
