@@ -1,19 +1,18 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 
-import { MessageType } from '../../enums';
-import { FsMessage } from '../../services/message.service';
 import { MatIcon } from '@angular/material/icon';
 
+import { MessageType } from '../../enums';
+import { FsMessage } from '../../services/message.service';
+
 @Component({
-    selector: 'fs-message',
-    templateUrl: './message.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [MatIcon],
+  selector: 'fs-message',
+  templateUrl: './message.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatIcon],
 })
 export class FsMessageComponent implements OnInit {
-  private _fsMessage = inject(FsMessage);
-
 
   @Input() public type = MessageType.Info;
   @Input() public message: string;
@@ -29,6 +28,8 @@ export class FsMessageComponent implements OnInit {
   }
 
   public icon = 'info';
+
+  private _fsMessage = inject(FsMessage);
 
   public ngOnInit() {
     this.icon = this._fsMessage.getIconName(this.type);
