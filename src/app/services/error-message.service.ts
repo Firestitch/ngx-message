@@ -58,6 +58,12 @@ export class FsErrorMessage {
       return of(true);
     }
 
+    // 403 is a signed-in user who is not allowed: a refusal, not a fault, so it
+    // offers no debug message
+    if (e.status === 403) {
+      return this.showAccessDenied(e.error?.message);
+    }
+
     const exception = e.error?.exception;
     const reason = e.error?.data?.reason;
     const ignore = ['Framework\\Db\\Exception\\DbConnectionException']
@@ -83,6 +89,13 @@ export class FsErrorMessage {
 
     return this._message
       .error('Please check your network connection and try again.', { mode: MessageMode.Toast });
+  }
+
+  public showAccessDenied(message?: string): Observable<any> {
+    return this._message.error(message || 'You don\'t have access to do this.', {
+      title: 'Access Denied',
+      mode: MessageMode.Dialog,
+    });
   }
 
   public showError(message: string, config: MessageDialogConfig = {}): Observable<any> {
